@@ -1,35 +1,27 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Replace hero image with a more cartoony cute illustration",
+  "title": "Replace Hero section image with uploaded WhatsApp PNG",
   "requirements": [
     {
-      "id": "REQ-27",
-      "summary": "Add the new cartoony cute hero illustration as a static public asset under frontend/public/assets/generated so it is served directly by the frontend.",
+      "id": "REQ-31",
+      "summary": "Add a sanitized static PNG asset for the new hero photo and update HeroSection to use it while preserving the existing imageError fallback.",
       "acceptanceCriteria": [
-        "A new cartoony hero image file exists in `frontend/public/assets/generated/` with the exact filename specified in this build request.",
-        "The image is accessible at runtime via an `<img src=\"/assets/generated/...\">` URL and loads successfully in the browser network tab (no 404)."
+        "A sanitized copy of the uploaded image exists under `frontend/public/assets/generated/` and is loadable directly via `/assets/generated/<sanitized-filename>.png`.",
+        "`frontend/src/components/sections/HeroSection.tsx` references the new sanitized PNG path for the main hero image instead of `/assets/generated/cute-hero-photo-v2.dim_1600x2000.jpg`.",
+        "The hero image renders successfully in the Hero section without triggering the \"Photo coming soon\" fallback when the asset is present.",
+        "If the new hero image fails to load (e.g., missing file), the existing fallback UI still appears as before."
       ],
       "file_operations": [
         {
-          "path": "frontend/public/assets/generated/cute-hero-photo-cartoony.dim_1600x2000.jpg",
+          "path": "frontend/public/assets/generated/whatsapp-image-2026-02-11-at-7-14-23-am.png",
           "operation": "create",
-          "description": "Add the generated cartoony hero portrait illustration asset at this exact path/filename so it is served as a static file (no backend involvement)."
-        }
-      ]
-    },
-    {
-      "id": "REQ-28",
-      "summary": "Update HeroSection to reference the new cartoony hero image filename while preserving the existing onError fallback placeholder behavior.",
-      "acceptanceCriteria": [
-        "`HeroSection` references the new cartoony image path in its main photo `src`.",
-        "On page load, the hero section displays the new cartoony image and does not fall back to the \"Photo coming soon\" placeholder when the asset exists."
-      ],
-      "file_operations": [
+          "description": "Add a sanitized copy of the uploaded asset \"WhatsApp Image 2026-02-11 at 7.14.23 AM.png\" as a static file under `frontend/public/assets/generated/` (no spaces/special characters in filename) so it can be served directly via `/assets/generated/whatsapp-image-2026-02-11-at-7-14-23-am.png`."
+        },
         {
           "path": "frontend/src/components/sections/HeroSection.tsx",
           "operation": "modify",
-          "description": "Replace the main hero photo <img> src from `/assets/generated/cute-hero-photo.dim_1600x2000.jpg` to `/assets/generated/cute-hero-photo-cartoony.dim_1600x2000.jpg`, keeping the existing onError-driven fallback placeholder unchanged."
+          "description": "Replace the hero photo `src` currently set to `/assets/generated/cute-hero-photo-v2.dim_1600x2000.jpg` with `/assets/generated/whatsapp-image-2026-02-11-at-7-14-23-am.png`, ensuring the existing `imageError` state and onError-driven fallback UI remains unchanged."
         }
       ]
     }

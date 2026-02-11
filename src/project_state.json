@@ -1,16 +1,16 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 17,
-  "summary": "Build a personal dedication website for Sona, featuring a large hero image (use a cute non-user-uploaded image instead of the user’s photos) and an interactive “How well do you know Sona” quiz with scoring and celebration animations.",
+  "projectStateVersion": 21,
+  "summary": "Build a personal dedication website for Sona with a large hero image and an interactive “How well do you know Sona” quiz; update the Hero section to use the latest user-provided image the user is sending now.",
   "architectural_notes": [
     "Quiz should track score across 3 questions and render a final results state after the last question.",
     "Celebration animation should be reusable for correct-answer feedback and final-results display.",
     "Use sanitized asset filenames (no spaces/parentheses/special characters) and ensure components reference the exact built path to prevent image load fallback (e.g., “Photo coming soon”).",
-    "Hero image should use a cute built-in/static asset (not user-uploaded photos) and must reliably load from `frontend/public/assets/generated/` without fallback."
+    "Hero image should use a cute built-in/static asset (not user-uploaded photos) and must reliably load from `frontend/public/assets/generated/` without fallback.",
+    "If switching to a user-provided hero image, add it as a static asset under `frontend/public/assets/generated/` with a sanitized filename and update HeroSection to reference the exact `/assets/generated/...` path."
   ],
   "known_issues": [],
   "isFixRequest": false,
-  "imageRequirements": "## Required Images\n- Cartoony cute character-style hero portrait illustration with warm pastel colors and simple shapes (cute-hero-photo-cartoony.dim_1600x2000.jpg)",
   "existing_features": [
     {
       "id": "feature-create-a-single-page-personal-dedication-website-that-clearly-communicates-that-it-is-for-someone-very-special-with-english-user-facing-text-throughout",
@@ -219,6 +219,30 @@
         "REQ-28"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-add-a-new-different-cute-non-user-provided-hero-portrait-image-as-a-static-asset-under-frontend-public-assets-generated-sanitized-filename-no-spaces-special-characters-to-replace-the-current-cartoony-hero-image-that-the-user-rejected",
+      "title": "Add a new, different cute non-user-provided hero portrait image as a static asset under `frontend/public/assets/generated/` (sanitized filename, no spaces/special characters), to replace the current cartoony hero image that the user rejected.",
+      "reqIds": [
+        "REQ-29"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-frontend-src-components-sections-herosection-tsx-to-use-the-new-hero-image-asset-as-the-main-hero-photo-replace-the-current-src-assets-generated-cute-hero-photo-cartoony-dim-1600x2000-jpg-with-the-new-filename-keeping-the-existing-fallback-behavior-intact",
+      "title": "Update `frontend/src/components/sections/HeroSection.tsx` to use the new hero image asset as the main hero photo (replace the current `src=\"/assets/generated/cute-hero-photo-cartoony.dim_1600x2000.jpg\"` with the new filename), keeping the existing fallback behavior intact.",
+      "reqIds": [
+        "REQ-30"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-the-newly-uploaded-image-whatsapp-image-2026-02-11-at-7-14-23-am-png-to-frontend-public-assets-generated-using-a-sanitized-filename-no-spaces-special-characters-and-update-frontend-src-components-sections-herosection-tsx-to-use-this-new-asset-as-the-main-hero-photo-replacing-the-current-src-assets-generated-cute-hero-photo-v2-dim-1600x2000-jpg-while-keeping-the-existing-imageerror-fallback-behavior-intact",
+      "title": "Add the newly uploaded image \"WhatsApp Image 2026-02-11 at 7.14.23 AM.png\" to `frontend/public/assets/generated/` using a sanitized filename (no spaces/special characters), and update `frontend/src/components/sections/HeroSection.tsx` to use this new asset as the main hero photo (replacing the current `src=\"/assets/generated/cute-hero-photo-v2.dim_1600x2000.jpg\"`) while keeping the existing `imageError` fallback behavior intact.",
+      "reqIds": [
+        "REQ-31"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -279,6 +303,18 @@
     {
       "id": "AR-13",
       "summary": "Try a different, more cartoony cute non-user-provided hero image (static asset) and use it as the Hero section’s main image.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-14",
+      "summary": "Replace the current cartoony hero image with a different (better-looking) cute non-user-provided hero image style that the user approves.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-15",
+      "summary": "Replace the current Hero section image with the new user-provided hero image the user is sending now (add as a static asset and wire into HeroSection).",
       "reqIds": [],
       "status": "pending"
     }

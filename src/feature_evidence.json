@@ -2,24 +2,8 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-add-a-new-more-cartoony-cute-hero-image-as-a-static-asset-under-frontend-public-assets-generated-and-ensure-it-can-be-loaded-directly-via-assets-generated-without-relying-on-the-backend",
-      "featureTitle": "Add a new more cartoony cute hero image as a static asset under `frontend/public/assets/generated/` and ensure it can be loaded directly via `/assets/generated/...` without relying on the backend.",
-      "files": [],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-27"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-update-frontend-src-components-sections-herosection-tsx-to-use-the-new-cartoony-hero-image-filename-in-the-main-hero-photo-img-currently-src-assets-generated-cute-hero-photo-dim-1600x2000-jpg",
-      "featureTitle": "Update `frontend/src/components/sections/HeroSection.tsx` to use the new cartoony hero image filename in the main hero photo `<img>` (currently `src=\"/assets/generated/cute-hero-photo.dim_1600x2000.jpg\"`).",
+      "featureId": "feature-add-the-newly-uploaded-image-whatsapp-image-2026-02-11-at-7-14-23-am-png-to-frontend-public-assets-generated-using-a-sanitized-filename-no-spaces-special-characters-and-update-frontend-src-components-sections-herosection-tsx-to-use-this-new-asset-as-the-main-hero-photo-replacing-the-current-src-assets-generated-cute-hero-photo-v2-dim-1600x2000-jpg-while-keeping-the-existing-imageerror-fallback-behavior-intact",
+      "featureTitle": "Add the newly uploaded image \"WhatsApp Image 2026-02-11 at 7.14.23 AM.png\" to `frontend/public/assets/generated/` using a sanitized filename (no spaces/special characters), and update `frontend/src/components/sections/HeroSection.tsx` to use this new asset as the main hero photo (replacing the current `src=\"/assets/generated/cute-hero-photo-v2.dim_1600x2000.jpg\"`) while keeping the existing `imageError` fallback behavior intact.",
       "files": [
         "frontend/src/components/sections/HeroSection.tsx"
       ],
@@ -31,7 +15,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-28"
+        "REQ-31"
       ],
       "confidence": "high"
     }

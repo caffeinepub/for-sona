@@ -1,31 +1,21 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-11T02:24:07.512Z",
+  "generatedAt": "2026-02-11T02:33:07.131Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 2,
-    "implemented": 2,
+    "total": 1,
+    "implemented": 1,
     "items": [
       {
-        "id": "REQ-27",
-        "summary": "Add a new more cartoony cute hero image as a static asset under `frontend/public/assets/generated/` and ensure it can be loaded directly via `/assets/generated/...` without relying on the backend.",
+        "id": "REQ-31",
+        "summary": "Add the newly uploaded image \"WhatsApp Image 2026-02-11 at 7.14.23 AM.png\" to `frontend/public/assets/generated/` using a sanitized filename (no spaces/special characters), and update `frontend/src/components/sections/HeroSection.tsx` to use this new asset as the main hero photo (replacing the current `src=\"/assets/generated/cute-hero-photo-v2.dim_1600x2000.jpg\"`) while keeping the existing `imageError` fallback behavior intact.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/public/assets/generated/cute-hero-photo-cartoony.dim_1600x2000.jpg"
-        ],
-        "matchedFiles": [
-          "frontend/public/assets/generated/cute-hero-photo-cartoony.dim_1600x2000.jpg"
-        ]
-      },
-      {
-        "id": "REQ-28",
-        "summary": "Update `frontend/src/components/sections/HeroSection.tsx` to use the new cartoony hero image filename in the main hero photo `<img>` (currently `src=\"/assets/generated/cute-hero-photo.dim_1600x2000.jpg\"`).",
-        "status": "implemented",
-        "plannedFiles": [
+          "frontend/public/assets/generated/whatsapp-image-2026-02-11-at-7-14-23-am.png",
           "frontend/src/components/sections/HeroSection.tsx"
         ],
         "matchedFiles": [
@@ -39,7 +29,6 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/public/assets/generated/cute-hero-photo-cartoony.dim_1600x2000.jpg",
     "frontend/src/components/sections/HeroSection.tsx",
     "project_state.json",
     "scratch/component-selection.json",

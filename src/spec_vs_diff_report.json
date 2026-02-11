@@ -1,35 +1,45 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-11T02:24:07.509Z",
-  "summary": "HeroSection was updated to reference the new cartoony hero image filename and retains the existing fallback-on-error behavior. However, the actual new static asset file was not added in the diff summary. There are also unrelated modifications to metadata/summary files not requested by the BuildRequest.",
+  "generatedAt": "2026-02-11T02:33:07.129Z",
+  "summary": "REQ-31 is not fully implemented. HeroSection was updated to point to a new image path, but it does not use a sanitized filename under `/assets/generated/`, and the diff shows no new static asset added under `frontend/public/assets/generated/`. The existing `imageError` fallback behavior appears to be preserved.",
   "missing_requirements": [
     {
-      "id": "REQ-27",
-      "requirement": "Add a new more cartoony cute hero image as a static asset under `frontend/public/assets/generated/` with the exact filename `cute-hero-photo-cartoony.dim_1600x2000.jpg`, accessible via `/assets/generated/...` without relying on the backend.",
-      "reason": "The diff summary shows no added files, and there is no evidence that `frontend/public/assets/generated/cute-hero-photo-cartoony.dim_1600x2000.jpg` was added to the repository. Without the static asset, the browser would 404 and the component would fall back to the placeholder.",
+      "id": "REQ-31",
+      "requirement": "Add the newly uploaded WhatsApp PNG to `frontend/public/assets/generated/` using a sanitized filename (no spaces/special characters) and reference it via `/assets/generated/<sanitized-filename>.png`.",
+      "reason": "No new file was added (diff shows Added: 0), and HeroSection references an unsanitized filename with spaces under `/assets/` rather than `/assets/generated/`.",
       "evidence": [
-        "File diff summary: ADDED FILES: none"
+        "File diff summary: \"Added: 0\"",
+        "frontend/src/components/sections/HeroSection.tsx: `src=\"/assets/WhatsApp Image 2026-02-11 at 7.14.23 AM.png\"`"
+      ]
+    },
+    {
+      "id": "REQ-31",
+      "requirement": "Update `frontend/src/components/sections/HeroSection.tsx` to use the new `/assets/generated/...` PNG path as the main hero photo, replacing `src=\"/assets/generated/cute-hero-photo-v2.dim_1600x2000.jpg\"`.",
+      "reason": "The hero image path was changed, but not to `/assets/generated/<sanitized-filename>.png` as required; it now points to `/assets/WhatsApp Image 2026-02-11 at 7.14.23 AM.png`.",
+      "evidence": [
+        "frontend/src/components/sections/HeroSection.tsx: `src=\"/assets/WhatsApp Image 2026-02-11 at 7.14.23 AM.png\"`"
       ]
     }
   ],
   "hallucinated_features": [
     {
-      "description": "Updated project metadata/state (project_state.json) unrelated to replacing the hero image asset/path.",
-      "reason": "BuildRequest only asked to add a new static hero image and update HeroSection to use it; it did not request updating project state tracking files.",
+      "description": "Hero image is loaded from `/assets/WhatsApp Image 2026-02-11 at 7.14.23 AM.png` (unsanitized filename with spaces) instead of a sanitized static asset under `/assets/generated/`.",
+      "reason": "This directly conflicts with the constraint/requirement that all images be served as static assets under `frontend/public/assets/generated/` and referenced via `/assets/generated/...`, and that the filename be sanitized.",
       "evidence": [
-        "project_state.json"
+        "frontend/src/components/sections/HeroSection.tsx: `src=\"/assets/WhatsApp Image 2026-02-11 at 7.14.23 AM.png\"`"
       ]
     },
     {
-      "description": "Updated frontend file summary documentation (frontend-file-summaries.txt).",
-      "reason": "BuildRequest did not request changing documentation/summary files; only the hero image asset and HeroSection reference.",
+      "description": "Updates to project metadata/summary files not requested by REQ-31 (e.g., `frontend-file-summaries.txt`, `project_state.json`).",
+      "reason": "BuildRequest is narrowly scoped to adding the image asset and updating HeroSection’s hero image path while preserving fallback; the diff shows additional modified files that are not part of that requirement.",
       "evidence": [
-        "frontend-file-summaries.txt"
+        "frontend-file-summaries.txt (modified)",
+        "project_state.json (modified)"
       ]
     }
   ],
-  "confidence": 0.74,
+  "confidence": 0.84,
   "changed_files": [
     "frontend-file-summaries.txt",
     "frontend/src/components/sections/HeroSection.tsx",

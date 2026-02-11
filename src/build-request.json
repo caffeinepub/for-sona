@@ -1,56 +1,39 @@
 {
   "kind": "build_request",
-  "title": "Replace hero image with a more cartoony cute illustration",
+  "title": "Replace Hero section image with newly uploaded WhatsApp PNG",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-27",
-      "text": "Add a new more cartoony cute hero image as a static asset under `frontend/public/assets/generated/` and ensure it can be loaded directly via `/assets/generated/...` without relying on the backend.",
+      "id": "REQ-31",
+      "text": "Add the newly uploaded image \"WhatsApp Image 2026-02-11 at 7.14.23 AM.png\" to `frontend/public/assets/generated/` using a sanitized filename (no spaces/special characters), and update `frontend/src/components/sections/HeroSection.tsx` to use this new asset as the main hero photo (replacing the current `src=\"/assets/generated/cute-hero-photo-v2.dim_1600x2000.jpg\"`) while keeping the existing `imageError` fallback behavior intact.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-3"
+          "msg-recent-4"
         ],
         "quotes": [
-          "try a different one more cartoony"
+          "can you try one last time to see if you can change the hero image to this one i am sending now"
         ]
       },
       "acceptanceCriteria": [
-        "A new cartoony hero image file exists in `frontend/public/assets/generated/` with the exact filename specified in this build request.",
-        "The image is accessible at runtime via an `<img src=\"/assets/generated/...\">` URL and loads successfully in the browser network tab (no 404)."
-      ]
-    },
-    {
-      "id": "REQ-28",
-      "text": "Update `frontend/src/components/sections/HeroSection.tsx` to use the new cartoony hero image filename in the main hero photo `<img>` (currently `src=\"/assets/generated/cute-hero-photo.dim_1600x2000.jpg\"`).",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-3"
-        ],
-        "quotes": [
-          "try a different one more cartoony"
-        ]
-      },
-      "acceptanceCriteria": [
-        "`HeroSection` references the new cartoony image path in its main photo `src`.",
-        "On page load, the hero section displays the new cartoony image and does not fall back to the \"Photo coming soon\" placeholder when the asset exists."
+        "A sanitized copy of the uploaded image exists under `frontend/public/assets/generated/` and is loadable directly via `/assets/generated/<sanitized-filename>.png`.",
+        "`frontend/src/components/sections/HeroSection.tsx` references the new sanitized PNG path for the main hero image instead of `/assets/generated/cute-hero-photo-v2.dim_1600x2000.jpg`.",
+        "The hero image renders successfully in the Hero section without triggering the \"Photo coming soon\" fallback when the asset is present.",
+        "If the new hero image fails to load (e.g., missing file), the existing fallback UI still appears as before."
       ]
     }
   ],
   "constraints": [
-    "Do not serve images via the backend; all images must be static assets in `frontend/public/assets/generated/`.",
-    "Keep the existing hero image fallback behavior (show the placeholder only when the hero image fails to load).",
-    "Do not modify files under `frontend/src/components/ui` or the immutable hook entrypoints listed in SYSTEM_CONTEXT."
+    "Do not serve images via the backend; all images must be static assets under `frontend/public/assets/generated/` and referenced via `/assets/generated/...`.",
+    "Do not modify any files under `frontend/src/components/ui` or other `frontend.immutablePaths` entries.",
+    "Keep the existing HeroSection fallback behavior (`imageError` state) intact."
   ],
   "nonGoals": [
-    "Changing quiz behavior, questions, scoring, or celebration animations.",
-    "Changing site navigation structure or section order."
+    "Changing any quiz content, quiz images, navigation, or closing section content.",
+    "Adding backend logic or data persistence."
   ],
   "imageRequirements": {
-    "required": [
-      "Cartoony cute character-style hero portrait illustration with warm pastel colors and simple shapes (cute-hero-photo-cartoony.dim_1600x2000.jpg)"
-    ],
+    "required": [],
     "edits": []
   }
 }
