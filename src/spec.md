@@ -1,10 +1,11 @@
 # Specification
 
 ## Summary
-**Goal:** Replace the Hero section’s main photo with the newly uploaded WhatsApp PNG while keeping the existing image-load fallback behavior.
+**Goal:** Remove the Quiz section side photo entirely and adjust the layout so no space is reserved for it on any screen size.
 
 **Planned changes:**
-- Add a sanitized-filename copy of `WhatsApp Image 2026-02-11 at 7.14.23 AM.png` under `frontend/public/assets/generated/`.
-- Update `frontend/src/components/sections/HeroSection.tsx` to reference the new PNG asset path (replacing `/assets/generated/cute-hero-photo-v2.dim_1600x2000.jpg`) while preserving the existing `imageError` fallback behavior.
+- Remove quiz-photo rendering from `frontend/src/components/sections/QuizSection.tsx` (do not render `QuizImage` or any `<img>` for the quiz photo on mobile or desktop).
+- Remove any quiz-photo-related fallback UI/text (e.g., “Photo could not be loaded”) and any now-unused state/imports that only supported the quiz image.
+- Update the Quiz section layout to a single-column (or equivalent) layout on large screens so there is no empty/sticky right-side photo column, while keeping quiz behavior unchanged.
 
-**User-visible outcome:** The Hero section displays the newly uploaded photo as the hero image, and still shows the existing “Photo coming soon” fallback if the image fails to load.
+**User-visible outcome:** The Quiz section shows only the quiz content (no side image and no image-fallback messaging) and remains responsive and visually balanced across mobile and desktop.

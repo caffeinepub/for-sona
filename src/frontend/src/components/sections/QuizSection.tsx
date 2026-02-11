@@ -106,7 +106,7 @@ export function QuizSection() {
     >
       <CelebrationAnimation show={showCelebration} />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="font-serif text-4xl sm:text-5xl font-bold text-foreground mb-4">
               {dedicationContent.quiz.heading}
@@ -116,39 +116,23 @@ export function QuizSection() {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-[1fr_300px] gap-8 items-start">
-            {/* Quiz Content */}
-            <div className="bg-card rounded-3xl p-8 sm:p-12 shadow-lg border border-border">
-              <h3 className="text-2xl sm:text-3xl font-serif text-foreground mb-8 text-center">
-                {currentQuestion.question}
-              </h3>
+          <div className="bg-card rounded-3xl p-8 sm:p-12 shadow-lg border border-border">
+            <h3 className="text-2xl sm:text-3xl font-serif text-foreground mb-8 text-center">
+              {currentQuestion.question}
+            </h3>
 
-              <div className="grid gap-4">
-                {currentQuestion.options.map((option, index) => (
-                  <Button
-                    key={index}
-                    onClick={() => handleAnswerSelect(option)}
-                    variant="outline"
-                    size="lg"
-                    className="h-auto py-6 text-lg hover:bg-primary hover:text-primary-foreground transition-all duration-200 hover:scale-105"
-                  >
-                    {option}
-                  </Button>
-                ))}
-              </div>
-            </div>
-
-            {/* Side Photo */}
-            <div className="hidden lg:block">
-              <div className="sticky top-24">
-                <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-xl border-2 border-primary/20">
-                  <img
-                    src="/assets/generated/WhatsApp Image 2026-02-11 at 7.14.23 AM-1.jpeg"
-                    alt="Sona"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
+            <div className="grid gap-4">
+              {currentQuestion.options.map((option, index) => (
+                <Button
+                  key={index}
+                  onClick={() => handleAnswerSelect(option)}
+                  variant="outline"
+                  size="lg"
+                  className="h-auto py-6 text-lg hover:bg-primary hover:text-primary-foreground transition-all duration-200 hover:scale-105"
+                >
+                  {option}
+                </Button>
+              ))}
             </div>
           </div>
         </div>

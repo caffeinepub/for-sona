@@ -2,10 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-add-the-newly-uploaded-image-whatsapp-image-2026-02-11-at-7-14-23-am-png-to-frontend-public-assets-generated-using-a-sanitized-filename-no-spaces-special-characters-and-update-frontend-src-components-sections-herosection-tsx-to-use-this-new-asset-as-the-main-hero-photo-replacing-the-current-src-assets-generated-cute-hero-photo-v2-dim-1600x2000-jpg-while-keeping-the-existing-imageerror-fallback-behavior-intact",
-      "featureTitle": "Add the newly uploaded image \"WhatsApp Image 2026-02-11 at 7.14.23 AM.png\" to `frontend/public/assets/generated/` using a sanitized filename (no spaces/special characters), and update `frontend/src/components/sections/HeroSection.tsx` to use this new asset as the main hero photo (replacing the current `src=\"/assets/generated/cute-hero-photo-v2.dim_1600x2000.jpg\"`) while keeping the existing `imageError` fallback behavior intact.",
+      "featureId": "feature-remove-the-quiz-section-photo-entirely-so-that-no-quiz-side-image-is-rendered-on-any-breakpoint-mobile-or-desktop-and-remove-any-related-image-loading-fallback-ui-text-from-the-quiz-section",
+      "featureTitle": "Remove the Quiz section photo entirely so that no quiz-side image is rendered on any breakpoint (mobile or desktop), and remove any related image-loading fallback UI/text from the Quiz section.",
       "files": [
-        "frontend/src/components/sections/HeroSection.tsx"
+        "frontend/src/components/sections/QuizSection.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -15,7 +15,25 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-31"
+        "REQ-41"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-the-quiz-section-layout-to-avoid-reserving-space-for-the-removed-side-image-e-g-collapse-the-two-column-grid-to-a-single-column-layout-on-large-screens-while-keeping-the-quiz-content-styling-and-behavior-questions-scoring-celebration-animation-results-view-unchanged",
+      "featureTitle": "Update the Quiz section layout to avoid reserving space for the removed side image (e.g., collapse the two-column grid to a single-column layout on large screens) while keeping the quiz content styling and behavior (questions, scoring, celebration animation, results view) unchanged.",
+      "files": [
+        "frontend/src/components/sections/QuizSection.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-42"
       ],
       "confidence": "high"
     }

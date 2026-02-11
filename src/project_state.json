@@ -1,16 +1,23 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 21,
-  "summary": "Build a personal dedication website for Sona with a large hero image and an interactive “How well do you know Sona” quiz; update the Hero section to use the latest user-provided image the user is sending now.",
+  "projectStateVersion": 31,
+  "summary": "Build a personal dedication website for Sona with a large hero image and an interactive “How well do you know Sona” quiz; the quiz-side photo should be removed entirely (no image displayed) since it is failing to load and the user no longer wants it.",
   "architectural_notes": [
     "Quiz should track score across 3 questions and render a final results state after the last question.",
     "Celebration animation should be reusable for correct-answer feedback and final-results display.",
     "Use sanitized asset filenames (no spaces/parentheses/special characters) and ensure components reference the exact built path to prevent image load fallback (e.g., “Photo coming soon”).",
     "Hero image should use a cute built-in/static asset (not user-uploaded photos) and must reliably load from `frontend/public/assets/generated/` without fallback.",
-    "If switching to a user-provided hero image, add it as a static asset under `frontend/public/assets/generated/` with a sanitized filename and update HeroSection to reference the exact `/assets/generated/...` path."
+    "If switching to a user-provided hero image, add it as a static asset under `frontend/public/assets/generated/` with a sanitized filename and update HeroSection to reference the exact `/assets/generated/...` path.",
+    "Quiz section: placement/layout is approved; only swap the referenced static asset to the newly provided image (sanitized filename under `frontend/public/assets/generated/`) and ensure the `<img src>` matches the exact built path.",
+    "Quiz section: remove the quiz-side photo entirely (no desktop sticky image and no mobile inline image) and ensure the layout remains responsive without an image or image-fallback UI."
   ],
-  "known_issues": [],
-  "isFixRequest": false,
+  "known_issues": [
+    "Build/publish attempt failed with an internal configuration error; user requested retry.",
+    "Quiz page image is not visible for the user (image not loading/displaying).",
+    "Quiz image placement is correct, but the Quiz section is currently showing the wrong image; needs to be swapped to the newly provided correct image asset.",
+    "User reports the UI shows the fallback message “photo could not be loaded”, indicating the referenced image asset is still failing to load in production."
+  ],
+  "isFixRequest": true,
   "existing_features": [
     {
       "id": "feature-create-a-single-page-personal-dedication-website-that-clearly-communicates-that-it-is-for-someone-very-special-with-english-user-facing-text-throughout",
@@ -243,6 +250,70 @@
         "REQ-31"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-update-frontend-src-components-sections-quizsection-tsx-to-use-the-newly-added-sanitized-assets-generated-png-as-the-quiz-section-side-photo-replacing-the-current-src-assets-generated-whatsapp-image-2026-02-11-at-7-14-23-am-1-jpeg-keep-the-current-responsive-behavior-hidden-on-small-screens-sticky-on-large-screens-and-ensure-the-layout-does-not-break-on-mobile",
+      "title": "Update `frontend/src/components/sections/QuizSection.tsx` to use the newly added sanitized `/assets/generated/...` PNG as the Quiz section side photo (replacing the current `src=\"/assets/generated/WhatsApp Image 2026-02-11 at 7.14.23 AM-1.jpeg\"`). Keep the current responsive behavior (hidden on small screens, sticky on large screens) and ensure the layout does not break on mobile.",
+      "reqIds": [
+        "REQ-33"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-the-quiz-section-side-image-so-it-reliably-displays-for-users-verify-the-referenced-static-asset-exists-under-frontend-public-assets-generated-with-the-exact-filename-used-in-frontend-src-components-sections-quizsection-tsx-and-update-the-img-src-to-match-the-real-file-path-if-it-does-not",
+      "title": "Fix the Quiz section side image so it reliably displays for users: verify the referenced static asset exists under `frontend/public/assets/generated/` with the exact filename used in `frontend/src/components/sections/QuizSection.tsx`, and update the `<img src>` to match the real file path if it does not.",
+      "reqIds": [
+        "REQ-34"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-frontend-src-components-sections-quizsection-tsx-add-an-image-load-fallback-for-the-quiz-side-photo-similar-to-the-hero-section-s-imageerror-handling-when-the-image-fails-to-load-replace-it-with-a-styled-placeholder-container-and-english-user-facing-text-indicating-the-photo-could-not-be-loaded",
+      "title": "In `frontend/src/components/sections/QuizSection.tsx`, add an image-load fallback for the Quiz side photo (similar to the Hero section’s `imageError` handling): when the image fails to load, replace it with a styled placeholder container and English user-facing text indicating the photo could not be loaded.",
+      "reqIds": [
+        "REQ-35"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-quiz-section-layout-so-the-quiz-image-is-not-completely-hidden-on-small-screens-render-an-additional-mobile-friendly-version-of-the-image-or-a-compact-card-within-the-quiz-content-flow-for-small-breakpoints-while-preserving-the-existing-sticky-side-image-behavior-on-large-screens",
+      "title": "Update the Quiz section layout so the Quiz image is not completely hidden on small screens: render an additional mobile-friendly version of the image (or a compact card) within the Quiz content flow for small breakpoints while preserving the existing sticky side-image behavior on large screens.",
+      "reqIds": [
+        "REQ-36"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-frontend-src-components-sections-quizsection-tsx-so-the-quiz-side-image-uses-the-newly-added-sanitized-png-asset-instead-of-the-currently-referenced-assets-generated-sona-quiz-side-photo-dim-1200x1600-jpg-while-keeping-the-existing-placement-and-responsive-behavior-unchanged-mobile-inline-image-desktop-sticky-side-image-and-keeping-the-existing-image-error-fallback-behavior",
+      "title": "Update `frontend/src/components/sections/QuizSection.tsx` so the quiz side image uses the newly added sanitized PNG asset instead of the currently referenced `/assets/generated/sona-quiz-side-photo.dim_1200x1600.jpg`, while keeping the existing placement and responsive behavior unchanged (mobile inline image + desktop sticky side image) and keeping the existing image-error fallback behavior.",
+      "reqIds": [
+        "REQ-38"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-frontend-src-components-sections-quizsection-tsx-so-the-quiz-side-photo-img-src-uses-the-newly-added-sanitized-jpeg-under-assets-generated-instead-of-the-currently-referenced-assets-generated-whatsapp-image-2026-02-11-at-7-14-23-am-1-1-png-while-keeping-the-existing-responsive-behavior-mobile-inline-image-desktop-sticky-side-image-and-keeping-the-existing-image-error-fallback-behavior-and-english-text-unchanged",
+      "title": "Update `frontend/src/components/sections/QuizSection.tsx` so the quiz side photo `<img src>` uses the newly added sanitized JPEG under `/assets/generated/` instead of the currently referenced `/assets/generated/whatsapp-image-2026-02-11-at-7-14-23-am-1-1.png`, while keeping the existing responsive behavior (mobile inline image + desktop sticky side image) and keeping the existing image error fallback behavior and English text unchanged.",
+      "reqIds": [
+        "REQ-40"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-remove-the-quiz-section-photo-entirely-so-that-no-quiz-side-image-is-rendered-on-any-breakpoint-mobile-or-desktop-and-remove-any-related-image-loading-fallback-ui-text-from-the-quiz-section",
+      "title": "Remove the Quiz section photo entirely so that no quiz-side image is rendered on any breakpoint (mobile or desktop), and remove any related image-loading fallback UI/text from the Quiz section.",
+      "reqIds": [
+        "REQ-41"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-quiz-section-layout-to-avoid-reserving-space-for-the-removed-side-image-e-g-collapse-the-two-column-grid-to-a-single-column-layout-on-large-screens-while-keeping-the-quiz-content-styling-and-behavior-questions-scoring-celebration-animation-results-view-unchanged",
+      "title": "Update the Quiz section layout to avoid reserving space for the removed side image (e.g., collapse the two-column grid to a single-column layout on large screens) while keeping the quiz content styling and behavior (questions, scoring, celebration animation, results view) unchanged.",
+      "reqIds": [
+        "REQ-42"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -315,6 +386,42 @@
     {
       "id": "AR-15",
       "summary": "Replace the current Hero section image with the new user-provided hero image the user is sending now (add as a static asset and wire into HeroSection).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-17",
+      "summary": "Add the newly uploaded image file \"WhatsApp Image 2026-02-11 at 7.14.23 AM (1).png\" to the frontend as a static asset under `frontend/public/assets/generated/` using a sanitized filename (no spaces/parentheses/special characters).",
+      "reqIds": [
+        "REQ-32"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-19",
+      "summary": "Add the newly uploaded image file \"WhatsApp Image 2026-02-11 at 7.14.23 AM (1)-1.png\" to the frontend as a static asset under `frontend/public/assets/generated/` using a sanitized filename (no spaces/parentheses/special characters).",
+      "reqIds": [
+        "REQ-37"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-20",
+      "summary": "Replace the currently failing image asset (showing “photo could not be loaded”) with a new user-provided file and rewire the relevant section (Hero and/or Quiz) to the new sanitized static asset path.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-21",
+      "summary": "Add the newly uploaded image file \"WhatsApp Image 2026-02-11 at 7.14.23 AM (1)-3.jpeg\" to `frontend/public/assets/generated/` using a sanitized filename (no spaces/parentheses/special characters) and ensure it is served at `/assets/generated/<sanitized-filename>.jpeg`.",
+      "reqIds": [
+        "REQ-39"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-22",
+      "summary": "Remove the Quiz section photo entirely (do not render the quiz-side image on any breakpoint) and keep the Quiz layout responsive without it.",
       "reqIds": [],
       "status": "pending"
     }

@@ -1,39 +1,69 @@
 {
   "kind": "build_request",
-  "title": "Replace Hero section image with newly uploaded WhatsApp PNG",
+  "title": "Remove Quiz section photo entirely",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-31",
-      "text": "Add the newly uploaded image \"WhatsApp Image 2026-02-11 at 7.14.23 AM.png\" to `frontend/public/assets/generated/` using a sanitized filename (no spaces/special characters), and update `frontend/src/components/sections/HeroSection.tsx` to use this new asset as the main hero photo (replacing the current `src=\"/assets/generated/cute-hero-photo-v2.dim_1600x2000.jpg\"`) while keeping the existing `imageError` fallback behavior intact.",
+      "id": "REQ-41",
+      "text": "Remove the Quiz section photo entirely so that no quiz-side image is rendered on any breakpoint (mobile or desktop), and remove any related image-loading fallback UI/text from the Quiz section.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-recent-4"
+          "msg-8"
         ],
         "quotes": [
-          "can you try one last time to see if you can change the hero image to this one i am sending now"
+          "then just remove the quiz photo entirely."
         ]
       },
       "acceptanceCriteria": [
-        "A sanitized copy of the uploaded image exists under `frontend/public/assets/generated/` and is loadable directly via `/assets/generated/<sanitized-filename>.png`.",
-        "`frontend/src/components/sections/HeroSection.tsx` references the new sanitized PNG path for the main hero image instead of `/assets/generated/cute-hero-photo-v2.dim_1600x2000.jpg`.",
-        "The hero image renders successfully in the Hero section without triggering the \"Photo coming soon\" fallback when the asset is present.",
-        "If the new hero image fails to load (e.g., missing file), the existing fallback UI still appears as before."
+        "`frontend/src/components/sections/QuizSection.tsx` no longer renders the `QuizImage` component (or any `<img>` for the quiz photo) in either the mobile or desktop layouts.",
+        "The Quiz section no longer displays the fallback message \"Photo could not be loaded\" (or any other quiz-photo placeholder/fallback UI), because the quiz photo is not rendered at all.",
+        "Any quiz-photo-specific state/imports (e.g., `imageError` state and `Heart` import used only for the quiz photo fallback) are removed if they are no longer needed.",
+        "The Quiz section remains responsive and visually balanced on both mobile and desktop after the image removal, with no layout breakage or excessive empty space."
+      ]
+    },
+    {
+      "id": "REQ-42",
+      "text": "Update the Quiz section layout to avoid reserving space for the removed side image (e.g., collapse the two-column grid to a single-column layout on large screens) while keeping the quiz content styling and behavior (questions, scoring, celebration animation, results view) unchanged.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-8"
+        ],
+        "quotes": [
+          "then just remove the quiz photo entirely."
+        ]
+      },
+      "acceptanceCriteria": [
+        "On large screens, the Quiz section no longer uses a layout that reserves a dedicated right-side column for a photo (no empty sticky column remains).",
+        "Quiz flow still functions end-to-end: selecting answers progresses through all 3 questions, celebration animation triggers on correct answers, and results render after question 3 with the existing result messages and \"Try Again\" reset behavior.",
+        "No backend changes are required for this update."
       ]
     }
   ],
   "constraints": [
-    "Do not serve images via the backend; all images must be static assets under `frontend/public/assets/generated/` and referenced via `/assets/generated/...`.",
-    "Do not modify any files under `frontend/src/components/ui` or other `frontend.immutablePaths` entries.",
-    "Keep the existing HeroSection fallback behavior (`imageError` state) intact."
+    "Do not edit files in `frontend/src/components/ui` (read-only Shadcn components); compose them instead.",
+    "Do not modify any frontend immutable paths listed in SYSTEM_CONTEXT.",
+    "Do not route images through the backend; static assets remain under `frontend/public/assets/generated` (even though the quiz photo will no longer be rendered).",
+    "Backend remains a single Motoko actor; no backend work is needed for this change."
   ],
   "nonGoals": [
-    "Changing any quiz content, quiz images, navigation, or closing section content.",
-    "Adding backend logic or data persistence."
+    "Do not change the quiz questions, correct answers, scoring logic, celebration animation behavior, or results messages.",
+    "Do not change the Hero section image behavior.",
+    "Do not attempt to fix the underlying asset-loading/configuration issue as part of this change; this request is specifically to remove the quiz photo."
   ],
   "imageRequirements": {
     "required": [],
     "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
   }
 }

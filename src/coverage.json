@@ -1,25 +1,35 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-11T02:33:07.131Z",
+  "generatedAt": "2026-02-11T03:12:22.682Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 1,
-    "implemented": 1,
+    "total": 2,
+    "implemented": 2,
     "items": [
       {
-        "id": "REQ-31",
-        "summary": "Add the newly uploaded image \"WhatsApp Image 2026-02-11 at 7.14.23 AM.png\" to `frontend/public/assets/generated/` using a sanitized filename (no spaces/special characters), and update `frontend/src/components/sections/HeroSection.tsx` to use this new asset as the main hero photo (replacing the current `src=\"/assets/generated/cute-hero-photo-v2.dim_1600x2000.jpg\"`) while keeping the existing `imageError` fallback behavior intact.",
+        "id": "REQ-41",
+        "summary": "Remove the Quiz section photo entirely so that no quiz-side image is rendered on any breakpoint (mobile or desktop), and remove any related image-loading fallback UI/text from the Quiz section.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/public/assets/generated/whatsapp-image-2026-02-11-at-7-14-23-am.png",
-          "frontend/src/components/sections/HeroSection.tsx"
+          "frontend/src/components/sections/QuizSection.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/components/sections/HeroSection.tsx"
+          "frontend/src/components/sections/QuizSection.tsx"
+        ]
+      },
+      {
+        "id": "REQ-42",
+        "summary": "Update the Quiz section layout to avoid reserving space for the removed side image (e.g., collapse the two-column grid to a single-column layout on large screens) while keeping the quiz content styling and behavior (questions, scoring, celebration animation, results view) unchanged.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/sections/QuizSection.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/sections/QuizSection.tsx"
         ]
       }
     ]
@@ -29,7 +39,7 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/components/sections/HeroSection.tsx",
+    "frontend/src/components/sections/QuizSection.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

@@ -1,27 +1,38 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Replace Hero section image with uploaded WhatsApp PNG",
+  "title": "Remove Quiz section side photo and collapse layout",
   "requirements": [
     {
-      "id": "REQ-31",
-      "summary": "Add a sanitized static PNG asset for the new hero photo and update HeroSection to use it while preserving the existing imageError fallback.",
+      "id": "REQ-41",
+      "summary": "Remove the Quiz section photo and all related fallback UI/state so no quiz-side image renders on any breakpoint.",
       "acceptanceCriteria": [
-        "A sanitized copy of the uploaded image exists under `frontend/public/assets/generated/` and is loadable directly via `/assets/generated/<sanitized-filename>.png`.",
-        "`frontend/src/components/sections/HeroSection.tsx` references the new sanitized PNG path for the main hero image instead of `/assets/generated/cute-hero-photo-v2.dim_1600x2000.jpg`.",
-        "The hero image renders successfully in the Hero section without triggering the \"Photo coming soon\" fallback when the asset is present.",
-        "If the new hero image fails to load (e.g., missing file), the existing fallback UI still appears as before."
+        "`frontend/src/components/sections/QuizSection.tsx` no longer renders the `QuizImage` component (or any `<img>` for the quiz photo) in either the mobile or desktop layouts.",
+        "The Quiz section no longer displays the fallback message \"Photo could not be loaded\" (or any other quiz-photo placeholder/fallback UI), because the quiz photo is not rendered at all.",
+        "Any quiz-photo-specific state/imports (e.g., `imageError` state and `Heart` import used only for the quiz photo fallback) are removed if they are no longer needed.",
+        "The Quiz section remains responsive and visually balanced on both mobile and desktop after the image removal, with no layout breakage or excessive empty space."
       ],
       "file_operations": [
         {
-          "path": "frontend/public/assets/generated/whatsapp-image-2026-02-11-at-7-14-23-am.png",
-          "operation": "create",
-          "description": "Add a sanitized copy of the uploaded asset \"WhatsApp Image 2026-02-11 at 7.14.23 AM.png\" as a static file under `frontend/public/assets/generated/` (no spaces/special characters in filename) so it can be served directly via `/assets/generated/whatsapp-image-2026-02-11-at-7-14-23-am.png`."
-        },
-        {
-          "path": "frontend/src/components/sections/HeroSection.tsx",
+          "path": "frontend/src/components/sections/QuizSection.tsx",
           "operation": "modify",
-          "description": "Replace the hero photo `src` currently set to `/assets/generated/cute-hero-photo-v2.dim_1600x2000.jpg` with `/assets/generated/whatsapp-image-2026-02-11-at-7-14-23-am.png`, ensuring the existing `imageError` state and onError-driven fallback UI remains unchanged."
+          "description": "Remove all quiz-photo rendering by deleting the QuizImage component and its usage blocks (mobile + desktop), and remove any related fallback UI/text. Clean up quiz-photo-specific imports and state (e.g., `Heart` import and `imageError` state) if unused after removal."
+        }
+      ]
+    },
+    {
+      "id": "REQ-42",
+      "summary": "Update Quiz section layout to stop reserving space for the removed side image while keeping quiz behavior unchanged.",
+      "acceptanceCriteria": [
+        "On large screens, the Quiz section no longer uses a layout that reserves a dedicated right-side column for a photo (no empty sticky column remains).",
+        "Quiz flow still functions end-to-end: selecting answers progresses through all 3 questions, celebration animation triggers on correct answers, and results render after question 3 with the existing result messages and \"Try Again\" reset behavior.",
+        "No backend changes are required for this update."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/sections/QuizSection.tsx",
+          "operation": "modify",
+          "description": "Refactor the large-screen layout from the current two-column grid (content + reserved photo column) into a single-column layout that centers and balances the quiz content, ensuring no sticky/empty column remains while keeping all quiz logic, transitions, and CelebrationAnimation behavior unchanged."
         }
       ]
     }
