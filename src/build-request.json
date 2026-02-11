@@ -1,0 +1,89 @@
+{
+  "kind": "build_request",
+  "title": "Place uploaded photos on Hero and Quiz sections; remove Letter/Moments content while keeping closing paragraph",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-17",
+      "text": "Add the two user-uploaded photos to the frontend as static assets under frontend/public/assets/generated, and use the *second uploaded photo* as the main Hero photo on the first section/page.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "the second photo is the main one in the 1st page."
+        ]
+      },
+      "acceptanceCriteria": [
+        "The second uploaded image (WhatsApp Image 2026-02-11 at 7.14.23 AM (1).jpeg) is available in frontend/public/assets/generated as sona-hero-photo.dim_1600x2000.jpg (or equivalent dimensioned filename)",
+        "HeroSection renders the new hero photo from /assets/generated/sona-hero-photo.dim_1600x2000.jpg",
+        "HeroSection retains its existing fallback UI if the hero photo cannot be loaded"
+      ]
+    },
+    {
+      "id": "REQ-18",
+      "text": "Display the *first uploaded photo* as a smaller, off-to-the-side image within the Quiz section/page without breaking mobile responsiveness.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "the 1st phto can be off to the side in the second page(quiz page)."
+        ]
+      },
+      "acceptanceCriteria": [
+        "The first uploaded image (WhatsApp Image 2026-02-11 at 7.14.23 AM.jpeg) is available in frontend/public/assets/generated as sona-quiz-side-photo.dim_1200x1600.jpg (or equivalent dimensioned filename)",
+        "QuizSection layout shows the quiz content with a side image on desktop (e.g., in a two-column layout) and stacks gracefully on mobile (no overflow/cutoff)",
+        "The side image uses an English alt attribute (e.g., \"Sona\") and is visually secondary to the quiz content"
+      ]
+    },
+    {
+      "id": "REQ-19",
+      "text": "Remove the site content/sections starting from the “A Message From the Heart” section through the Moments section, while keeping the user’s dedication paragraph in the Closing section intact.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "please remove the part from a message from the heart all the way to my paragraph( dont remove my paragraph)"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The Letter section (id=\"letter\") is no longer rendered in the main page flow",
+        "The Moments section (id=\"moments\") is no longer rendered in the main page flow",
+        "The Closing section still renders dedicationContent.closing.message and dedicationContent.closing.signature exactly as before",
+        "Top navigation no longer shows links to removed sections (e.g., remove/disable \"Message\" and \"Moments\" buttons), and remaining links still smooth-scroll correctly"
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not edit any files under frontend/src/components/ui or any frontend immutablePaths listed in SYSTEM_CONTEXT.",
+    "Do not serve images via the backend; photos must be rendered as static assets from frontend/public/assets/generated.",
+    "Backend remains single-actor; no backend changes are required for these UI/content updates."
+  ],
+  "nonGoals": [
+    "Do not change quiz question text, options, correct answers, scoring, or celebration animation behavior.",
+    "Do not modify the existing Closing section dedication paragraph content (the user’s paragraph).",
+    "Do not introduce new sections beyond placing the side photo within the existing Quiz section."
+  ],
+  "imageRequirements": {
+    "required": [
+      "Portrait photo of a woman holding a white cat (sona-quiz-side-photo.dim_1200x1600.jpg)",
+      "Portrait photo of a woman wearing a hat and sunglasses with colorful lights (sona-hero-photo.dim_1600x2000.jpg)"
+    ],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

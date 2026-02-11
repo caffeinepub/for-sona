@@ -1,0 +1,226 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 9,
+  "summary": "Build a personal dedication website for Sona, including a large hero image and an interactive “How well do you know Sona” quiz with scoring and celebration animations.",
+  "architectural_notes": [
+    "Quiz should track score across 3 questions and render a final results state after the last question.",
+    "Celebration animation should be reusable for correct-answer feedback and final-results display."
+  ],
+  "known_issues": [],
+  "isFixRequest": true,
+  "imageRequirements": "## Required Images\n- Portrait photo of a woman holding a white cat (sona-quiz-side-photo.dim_1200x1600.jpg)\n- Portrait photo of a woman wearing a hat and sunglasses with colorful lights (sona-hero-photo.dim_1600x2000.jpg)",
+  "existing_features": [
+    {
+      "id": "feature-create-a-single-page-personal-dedication-website-that-clearly-communicates-that-it-is-for-someone-very-special-with-english-user-facing-text-throughout",
+      "title": "Create a single-page personal dedication website that clearly communicates that it is for “someone very special”, with English user-facing text throughout.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-provide-a-simple-centralized-way-to-customize-the-dedication-content-e-g-names-short-message-key-moments-and-optional-quotes-without-editing-multiple-components",
+      "title": "Provide a simple, centralized way to customize the dedication content (e.g., names, short message, key moments, and optional quotes) without editing multiple components.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-design-and-apply-a-creative-coherent-visual-theme-for-the-site-colors-typography-spacing-and-component-styling-suitable-for-a-heartfelt-dedication-enforce-the-theme-consistently-across-all-sections-avoid-blue-purple-dominant-palettes",
+      "title": "Design and apply a creative, coherent visual theme for the site (colors, typography, spacing, and component styling) suitable for a heartfelt dedication; enforce the theme consistently across all sections (avoid blue/purple-dominant palettes).",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-core-sections-commonly-expected-for-a-dedication-page-hero-cover-section-a-short-dedication-letter-message-section-a-highlights-timeline-or-favorite-moments-section-and-a-simple-closing-section-signature-style",
+      "title": "Implement core sections commonly expected for a dedication page: hero/cover section, a short dedication letter/message section, a highlights/timeline or “favorite moments” section, and a simple closing section (signature-style).",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-basic-navigation-and-usability-a-sticky-or-top-navigation-with-anchors-to-each-section-smooth-scrolling-and-responsive-layout-for-mobile-and-desktop",
+      "title": "Add basic navigation and usability: a sticky or top navigation with anchors to each section, smooth scrolling, and responsive layout for mobile and desktop.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-generated-static-images-as-part-of-the-site-design-and-render-them-from-frontend-public-assets-generated-do-not-serve-images-via-the-backend",
+      "title": "Add generated static images as part of the site design and render them from frontend/public/assets/generated (do not serve images via the backend).",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-dedication-site-s-visible-title-text-to-for-sona-including-the-hero-headline-and-the-top-left-brand-title-text-in-the-sticky-navigation",
+      "title": "Update the dedication site’s visible title text to “For Sona”, including the hero headline and the top-left brand/title text in the sticky navigation.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-make-the-hero-section-s-main-image-prominently-large-and-ready-to-be-replaced-by-a-provided-photo-later-implement-a-clear-placeholder-fallback-so-the-hero-section-still-looks-good-before-the-photo-is-added",
+      "title": "Make the hero section’s main image prominently large and ready to be replaced by a provided photo later; implement a clear placeholder/fallback so the hero section still looks good before the photo is added.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-new-dedicated-section-after-the-hero-section-titled-how-well-do-you-know-sona-that-behaves-like-a-3-question-multiple-choice-quiz-with-scoring",
+      "title": "Add a new dedicated section after the hero section titled “How well do you know Sona” that behaves like a 3-question multiple-choice quiz with scoring.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-quiz-question-1-exactly-as-specified-question-text-what-is-sona-s-favourite-food-with-options-icecream-pizza-biriyani-where-biriyani-is-the-only-correct-answer-choosing-the-correct-answer-triggers-a-celebration-animation",
+      "title": "Implement quiz question 1 exactly as specified: question text “What is Sona's favourite food?” with options “icecream”, “pizza”, “biriyani”, where “biriyani” is the only correct answer; choosing the correct answer triggers a celebration animation.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-quiz-question-2-exactly-as-specified-question-text-what-is-sona-s-favourite-song-with-correct-option-tum-hi-ho-and-wrong-options-sahiba-and-apna-bana-le-choosing-the-correct-answer-triggers-the-same-celebration-animation-used-in-question-1",
+      "title": "Implement quiz question 2 exactly as specified: question text “What is Sona's favourite song?” with correct option “Tum Hi Ho” and wrong options “Sahiba” and “Apna Bana Le”; choosing the correct answer triggers the same celebration animation used in question 1.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-quiz-question-3-exactly-as-specified-question-text-which-of-the-of-the-following-cant-sona-handle-very-well-with-options-loud-sounds-spicy-food-her-health-and-all-of-the-above-where-all-of-the-above-is-the-correct-answer-choosing-the-correct-answer-triggers-the-same-celebration-animation",
+      "title": "Implement quiz question 3 exactly as specified: question text “which of the of the following cant sona handle very well?” with options “Loud sounds”, “Spicy food”, “her health”, and “all of the above”, where “all of the above” is the correct answer; choosing the correct answer triggers the same celebration animation.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-after-the-third-question-is-answered-show-a-final-results-view-that-displays-a-message-based-on-total-correct-answers-0-3-using-the-exact-messages-provided-and-play-the-celebration-animation-when-the-results-are-shown",
+      "title": "After the third question is answered, show a final results view that displays a message based on total correct answers (0–3) using the exact messages provided, and play the celebration animation when the results are shown.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-sticky-top-navigation-to-include-an-anchor-link-to-the-new-quiz-section",
+      "title": "Update the sticky top navigation to include an anchor link to the new quiz section.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-the-quiz-content-title-questions-options-correct-answers-and-result-messages-to-the-centralized-content-configuration-so-it-can-be-edited-in-one-place",
+      "title": "Add the quiz content (title, questions, options, correct answers, and result messages) to the centralized content configuration so it can be edited in one place.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-last-section-closingsection-to-display-the-user-provided-dedication-as-a-single-simple-paragraph-addressed-to-chona-and-update-the-signature-line-to-with-love-your-bakku-the-dedication-text-must-be-stored-in-the-centralized-content-configuration-frontend-src-content-dedicationcontent-ts-and-rendered-from-there",
+      "title": "Update the last section (ClosingSection) to display the user-provided dedication as a single, simple paragraph addressed to “chona”, and update the signature line to “with love, your bakku.” The dedication text must be stored in the centralized content configuration (frontend/src/content/dedicationContent.ts) and rendered from there.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-the-two-user-uploaded-photos-to-the-frontend-as-static-assets-under-frontend-public-assets-generated-and-use-the-second-uploaded-photo-as-the-main-hero-photo-on-the-first-section-page",
+      "title": "Add the two user-uploaded photos to the frontend as static assets under frontend/public/assets/generated, and use the *second uploaded photo* as the main Hero photo on the first section/page.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-display-the-first-uploaded-photo-as-a-smaller-off-to-the-side-image-within-the-quiz-section-page-without-breaking-mobile-responsiveness",
+      "title": "Display the *first uploaded photo* as a smaller, off-to-the-side image within the Quiz section/page without breaking mobile responsiveness.",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-remove-the-site-content-sections-starting-from-the-a-message-from-the-heart-section-through-the-moments-section-while-keeping-the-user-s-dedication-paragraph-in-the-closing-section-intact",
+      "title": "Remove the site content/sections starting from the “A Message From the Heart” section through the Moments section, while keeping the user’s dedication paragraph in the Closing section intact.",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Create a personal website for someone very special.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Set the site/page title to “For Sona” and reflect Sona-specific wording across the site.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Add a large hero image on the first page/section (photo to be provided later) and design the layout to prominently feature it.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Add a second page/section quiz titled “How well do you know Sona” with 3 multiple-choice questions and correct answers as specified.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Play a celebration animation when a correct quiz option is selected and also when showing the final results.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Show a final quiz result message after question 3 based on score: 0 “very poor Sona knowledge”, 1 “room for improvement.”, 2 “You know sona very well.”, 3 “You are a Sona fangirl.”",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Update the final/closing section (last page) to display the provided dedication paragraph/letter text addressed to “chona” and signed “with love, your bakku.”",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Update image placement: use the 2nd photo as the main hero image on the 1st page; place the 1st photo off to the side on the quiz section/page.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Remove the content/section from “A message from the heart” up to (but not including) the user’s dedication paragraph; keep the user’s paragraph intact.",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "For Sona",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}
