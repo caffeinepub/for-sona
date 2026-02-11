@@ -143,7 +143,7 @@ export function QuizSection() {
               <div className="sticky top-24">
                 <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-xl border-2 border-primary/20">
                   <img
-                    src="/assets/generated/sona-quiz-side-photo.dim_1200x1600.jpg"
+                    src="/assets/generated/WhatsApp Image 2026-02-11 at 7.14.23 AM-1.jpeg"
                     alt="Sona"
                     className="w-full h-full object-cover"
                   />

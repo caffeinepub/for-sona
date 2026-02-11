@@ -55,7 +55,7 @@ export function HeroSection() {
                 <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border-4 border-primary/20">
                   {!imageError ? (
                     <img
-                      src="/assets/generated/sona-hero-photo.dim_1600x2000.jpg"
+                      src="/assets/generated/cute-hero-photo-cartoony.dim_1600x2000.jpg"
                       alt="Sona"
                       className="w-full h-full object-cover"
                       onError={() => setImageError(true)}

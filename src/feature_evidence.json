@@ -2,8 +2,8 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-add-the-two-user-uploaded-photos-to-the-frontend-as-static-assets-under-frontend-public-assets-generated-and-use-the-second-uploaded-photo-as-the-main-hero-photo-on-the-first-section-page",
-      "featureTitle": "Add the two user-uploaded photos to the frontend as static assets under frontend/public/assets/generated, and use the *second uploaded photo* as the main Hero photo on the first section/page.",
+      "featureId": "feature-add-a-new-more-cartoony-cute-hero-image-as-a-static-asset-under-frontend-public-assets-generated-and-ensure-it-can-be-loaded-directly-via-assets-generated-without-relying-on-the-backend",
+      "featureTitle": "Add a new more cartoony cute hero image as a static asset under `frontend/public/assets/generated/` and ensure it can be loaded directly via `/assets/generated/...` without relying on the backend.",
       "files": [],
       "components": [
         "core-infrastructure@1.0.2",
@@ -13,15 +13,15 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-17"
+        "REQ-27"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-display-the-first-uploaded-photo-as-a-smaller-off-to-the-side-image-within-the-quiz-section-page-without-breaking-mobile-responsiveness",
-      "featureTitle": "Display the *first uploaded photo* as a smaller, off-to-the-side image within the Quiz section/page without breaking mobile responsiveness.",
+      "featureId": "feature-update-frontend-src-components-sections-herosection-tsx-to-use-the-new-cartoony-hero-image-filename-in-the-main-hero-photo-img-currently-src-assets-generated-cute-hero-photo-dim-1600x2000-jpg",
+      "featureTitle": "Update `frontend/src/components/sections/HeroSection.tsx` to use the new cartoony hero image filename in the main hero photo `<img>` (currently `src=\"/assets/generated/cute-hero-photo.dim_1600x2000.jpg\"`).",
       "files": [
-        "frontend/src/components/sections/QuizSection.tsx"
+        "frontend/src/components/sections/HeroSection.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -31,26 +31,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-18"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-remove-the-site-content-sections-starting-from-the-a-message-from-the-heart-section-through-the-moments-section-while-keeping-the-user-s-dedication-paragraph-in-the-closing-section-intact",
-      "featureTitle": "Remove the site content/sections starting from the “A Message From the Heart” section through the Moments section, while keeping the user’s dedication paragraph in the Closing section intact.",
-      "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/components/TopNav.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-19"
+        "REQ-28"
       ],
       "confidence": "high"
     }

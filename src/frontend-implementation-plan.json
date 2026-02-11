@@ -1,69 +1,35 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Update hero/quiz photos and remove Letter/Moments sections while preserving Closing dedication",
+  "title": "Replace hero image with a more cartoony cute illustration",
   "requirements": [
     {
-      "id": "REQ-17",
-      "summary": "Add uploaded photos as static assets and use the second photo as the Hero image with existing fallback preserved.",
+      "id": "REQ-27",
+      "summary": "Add the new cartoony cute hero illustration as a static public asset under frontend/public/assets/generated so it is served directly by the frontend.",
       "acceptanceCriteria": [
-        "The second uploaded image (WhatsApp Image 2026-02-11 at 7.14.23 AM (1).jpeg) is available in frontend/public/assets/generated as sona-hero-photo.dim_1600x2000.jpg (or equivalent dimensioned filename)",
-        "HeroSection renders the new hero photo from /assets/generated/sona-hero-photo.dim_1600x2000.jpg",
-        "HeroSection retains its existing fallback UI if the hero photo cannot be loaded"
+        "A new cartoony hero image file exists in `frontend/public/assets/generated/` with the exact filename specified in this build request.",
+        "The image is accessible at runtime via an `<img src=\"/assets/generated/...\">` URL and loads successfully in the browser network tab (no 404)."
       ],
       "file_operations": [
         {
-          "path": "frontend/public/assets/generated/sona-hero-photo.dim_1600x2000.jpg",
+          "path": "frontend/public/assets/generated/cute-hero-photo-cartoony.dim_1600x2000.jpg",
           "operation": "create",
-          "description": "Add the second uploaded photo as a generated static asset at this exact path and filename (source: WhatsApp Image 2026-02-11 at 7.14.23 AM (1).jpeg)."
-        },
+          "description": "Add the generated cartoony hero portrait illustration asset at this exact path/filename so it is served as a static file (no backend involvement)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-28",
+      "summary": "Update HeroSection to reference the new cartoony hero image filename while preserving the existing onError fallback placeholder behavior.",
+      "acceptanceCriteria": [
+        "`HeroSection` references the new cartoony image path in its main photo `src`.",
+        "On page load, the hero section displays the new cartoony image and does not fall back to the \"Photo coming soon\" placeholder when the asset exists."
+      ],
+      "file_operations": [
         {
           "path": "frontend/src/components/sections/HeroSection.tsx",
           "operation": "modify",
-          "description": "Ensure the Hero section uses /assets/generated/sona-hero-photo.dim_1600x2000.jpg as the primary image while keeping the current onError-driven fallback UI behavior intact."
-        }
-      ]
-    },
-    {
-      "id": "REQ-18",
-      "summary": "Show the first uploaded photo as a visually secondary side image within the Quiz section without breaking mobile responsiveness.",
-      "acceptanceCriteria": [
-        "The first uploaded image (WhatsApp Image 2026-02-11 at 7.14.23 AM.jpeg) is available in frontend/public/assets/generated as sona-quiz-side-photo.dim_1200x1600.jpg (or equivalent dimensioned filename)",
-        "QuizSection layout shows the quiz content with a side image on desktop (e.g., in a two-column layout) and stacks gracefully on mobile (no overflow/cutoff)",
-        "The side image uses an English alt attribute (e.g., \"Sona\") and is visually secondary to the quiz content"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/public/assets/generated/sona-quiz-side-photo.dim_1200x1600.jpg",
-          "operation": "create",
-          "description": "Add the first uploaded photo as a generated static asset at this exact path and filename (source: WhatsApp Image 2026-02-11 at 7.14.23 AM.jpeg)."
-        },
-        {
-          "path": "frontend/src/components/sections/QuizSection.tsx",
-          "operation": "modify",
-          "description": "Update the Quiz section layout to include a smaller side image sourced from /assets/generated/sona-quiz-side-photo.dim_1200x1600.jpg (alt text in English, e.g., \"Sona\"), rendered in a two-column layout on desktop and stacked below/above content on mobile without overflow; keep quiz logic, scoring, and celebration behavior unchanged."
-        }
-      ]
-    },
-    {
-      "id": "REQ-19",
-      "summary": "Remove Letter and Moments sections from the main page flow and navigation while preserving the Closing dedication paragraph exactly.",
-      "acceptanceCriteria": [
-        "The Letter section (id=\"letter\") is no longer rendered in the main page flow",
-        "The Moments section (id=\"moments\") is no longer rendered in the main page flow",
-        "The Closing section still renders dedicationContent.closing.message and dedicationContent.closing.signature exactly as before",
-        "Top navigation no longer shows links to removed sections (e.g., remove/disable \"Message\" and \"Moments\" buttons), and remaining links still smooth-scroll correctly"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Remove rendering of LetterSection and MomentsSection from the main page flow while keeping HeroSection, QuizSection, and ClosingSection in place."
-        },
-        {
-          "path": "frontend/src/components/TopNav.tsx",
-          "operation": "modify",
-          "description": "Remove (or disable) navigation buttons that scroll to the removed sections (\"Message\" for id=\"letter\" and \"Moments\" for id=\"moments\"), ensuring remaining links (Hero, Quiz, Closing) still smooth-scroll correctly."
+          "description": "Replace the main hero photo <img> src from `/assets/generated/cute-hero-photo.dim_1600x2000.jpg` to `/assets/generated/cute-hero-photo-cartoony.dim_1600x2000.jpg`, keeping the existing onError-driven fallback placeholder unchanged."
         }
       ]
     }

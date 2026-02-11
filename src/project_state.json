@@ -1,14 +1,16 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 9,
-  "summary": "Build a personal dedication website for Sona, including a large hero image and an interactive “How well do you know Sona” quiz with scoring and celebration animations.",
+  "projectStateVersion": 17,
+  "summary": "Build a personal dedication website for Sona, featuring a large hero image (use a cute non-user-uploaded image instead of the user’s photos) and an interactive “How well do you know Sona” quiz with scoring and celebration animations.",
   "architectural_notes": [
     "Quiz should track score across 3 questions and render a final results state after the last question.",
-    "Celebration animation should be reusable for correct-answer feedback and final-results display."
+    "Celebration animation should be reusable for correct-answer feedback and final-results display.",
+    "Use sanitized asset filenames (no spaces/parentheses/special characters) and ensure components reference the exact built path to prevent image load fallback (e.g., “Photo coming soon”).",
+    "Hero image should use a cute built-in/static asset (not user-uploaded photos) and must reliably load from `frontend/public/assets/generated/` without fallback."
   ],
   "known_issues": [],
-  "isFixRequest": true,
-  "imageRequirements": "## Required Images\n- Portrait photo of a woman holding a white cat (sona-quiz-side-photo.dim_1200x1600.jpg)\n- Portrait photo of a woman wearing a hat and sunglasses with colorful lights (sona-hero-photo.dim_1600x2000.jpg)",
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Cartoony cute character-style hero portrait illustration with warm pastel colors and simple shapes (cute-hero-photo-cartoony.dim_1600x2000.jpg)",
   "existing_features": [
     {
       "id": "feature-create-a-single-page-personal-dedication-website-that-clearly-communicates-that-it-is-for-someone-very-special-with-english-user-facing-text-throughout",
@@ -161,6 +163,62 @@
         "REQ-19"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-update-the-hero-section-to-display-the-second-uploaded-photo-whatsapp-image-2026-02-11-at-7-14-23-am-1-1-jpeg-as-the-main-hero-photo-by-wiring-it-to-the-image-used-in-frontend-src-components-sections-herosection-tsx-currently-assets-generated-sona-hero-photo-dim-1600x2000-jpg",
+      "title": "Update the Hero section to display the *second uploaded photo* (\"WhatsApp Image 2026-02-11 at 7.14.23 AM (1)-1.jpeg\") as the main hero photo by wiring it to the image used in `frontend/src/components/sections/HeroSection.tsx` (currently `/assets/generated/sona-hero-photo.dim_1600x2000.jpg`).",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-quiz-section-to-display-the-first-uploaded-photo-whatsapp-image-2026-02-11-at-7-14-23-am-1-jpeg-as-the-side-image-by-wiring-it-to-the-image-used-in-frontend-src-components-sections-quizsection-tsx-currently-assets-generated-sona-quiz-side-photo-dim-1200x1600-jpg-maintain-responsive-behavior-no-layout-break-on-mobile",
+      "title": "Update the Quiz section to display the *first uploaded photo* (\"WhatsApp Image 2026-02-11 at 7.14.23 AM-1.jpeg\") as the side image by wiring it to the image used in `frontend/src/components/sections/QuizSection.tsx` (currently `/assets/generated/sona-quiz-side-photo.dim_1200x1600.jpg`). Maintain responsive behavior (no layout break on mobile).",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-frontend-src-components-sections-herosection-tsx-to-reference-the-renamed-hero-photo-asset-replacing-the-current-src-assets-generated-whatsapp-image-2026-02-11-at-7-14-23-am-1-1-jpeg",
+      "title": "Update `frontend/src/components/sections/HeroSection.tsx` to reference the renamed hero photo asset (replacing the current `src=\"/assets/generated/WhatsApp Image 2026-02-11 at 7.14.23 AM (1)-1.jpeg\"`).",
+      "reqIds": [
+        "REQ-24"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-frontend-src-components-sections-quizsection-tsx-to-reference-the-renamed-quiz-side-photo-asset-replacing-the-current-src-assets-generated-whatsapp-image-2026-02-11-at-7-14-23-am-1-jpeg",
+      "title": "Update `frontend/src/components/sections/QuizSection.tsx` to reference the renamed quiz side photo asset (replacing the current `src=\"/assets/generated/WhatsApp Image 2026-02-11 at 7.14.23 AM-1.jpeg\"`).",
+      "reqIds": [
+        "REQ-25"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-new-cute-non-user-provided-hero-image-as-a-static-asset-under-frontend-public-assets-generated-and-use-it-as-the-hero-section-s-main-image-instead-of-the-user-uploaded-whatsapp-photo-currently-referenced-in-frontend-src-components-sections-herosection-tsx",
+      "title": "Add a new cute, non-user-provided hero image as a static asset under `frontend/public/assets/generated` and use it as the Hero section’s main image instead of the user-uploaded WhatsApp photo currently referenced in `frontend/src/components/sections/HeroSection.tsx`.",
+      "reqIds": [
+        "REQ-26"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-new-more-cartoony-cute-hero-image-as-a-static-asset-under-frontend-public-assets-generated-and-ensure-it-can-be-loaded-directly-via-assets-generated-without-relying-on-the-backend",
+      "title": "Add a new more cartoony cute hero image as a static asset under `frontend/public/assets/generated/` and ensure it can be loaded directly via `/assets/generated/...` without relying on the backend.",
+      "reqIds": [
+        "REQ-27"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-frontend-src-components-sections-herosection-tsx-to-use-the-new-cartoony-hero-image-filename-in-the-main-hero-photo-img-currently-src-assets-generated-cute-hero-photo-dim-1600x2000-jpg",
+      "title": "Update `frontend/src/components/sections/HeroSection.tsx` to use the new cartoony hero image filename in the main hero photo `<img>` (currently `src=\"/assets/generated/cute-hero-photo.dim_1600x2000.jpg\"`).",
+      "reqIds": [
+        "REQ-28"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -207,14 +265,20 @@
       "status": "pending"
     },
     {
-      "id": "AR-8",
-      "summary": "Update image placement: use the 2nd photo as the main hero image on the 1st page; place the 1st photo off to the side on the quiz section/page.",
+      "id": "AR-9",
+      "summary": "Remove the content/section from “A message from the heart” up to (but not including) the user’s dedication paragraph; keep the user’s paragraph intact.",
       "reqIds": [],
       "status": "pending"
     },
     {
-      "id": "AR-9",
-      "summary": "Remove the content/section from “A message from the heart” up to (but not including) the user’s dedication paragraph; keep the user’s paragraph intact.",
+      "id": "AR-12",
+      "summary": "Replace the planned user-uploaded hero photo with a cute, non-user-provided hero image (static asset) and wire it into the Hero section so no upload is required.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Try a different, more cartoony cute non-user-provided hero image (static asset) and use it as the Hero section’s main image.",
       "reqIds": [],
       "status": "pending"
     }
