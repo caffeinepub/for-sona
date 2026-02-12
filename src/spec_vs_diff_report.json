@@ -1,11 +1,30 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-11T03:12:22.678Z",
-  "summary": "The diff indicates the Quiz section was refactored to a centered single-column layout and no longer shows any quiz-side image or related fallback UI, aligning with the request to remove the quiz photo and collapse the layout that previously reserved space for it.",
-  "missing_requirements": [],
+  "generatedAt": "2026-02-12T03:26:01.841Z",
+  "summary": "REQ-47 appears partially implemented (the results-card sticker image src is updated), but REQ-46 is not implemented because no new static asset file was added. Due to truncation, it cannot be confirmed that the question-card sticker <img> src was also updated.",
+  "missing_requirements": [
+    {
+      "id": "REQ-46",
+      "requirement": "Add the user-uploaded sticker image file to `frontend/public/assets/generated/` using a sanitized filename and ensure it is loadable at `/assets/generated/<sanitized-filename>.jpg`.",
+      "reason": "The diff shows `Added: 0` and explicitly lists no added files, so the required image asset file does not appear to have been added under `frontend/public/assets/generated/`.",
+      "evidence": [
+        "File diff summary: \"Added: 0\"",
+        "ADDED FILES: \"- none\""
+      ]
+    },
+    {
+      "id": "REQ-47",
+      "requirement": "Update `frontend/src/components/sections/QuizSection.tsx` so both corner sticker `<img>` elements (question card and results card) use the real sanitized asset path under `/assets/generated/`.",
+      "reason": "The diff excerpt confirms the results view uses `/assets/generated/kawaii-valentines-stickers-1.jpg`, but the question-card portion of the file is truncated, so there is no direct evidence that the question-card `<img>` src was also updated.",
+      "evidence": [
+        "frontend/src/components/sections/QuizSection.tsx (shows results card img src updated to `/assets/generated/kawaii-valentines-stickers-1.jpg`)",
+        "frontend/src/components/sections/QuizSection.tsx (question card section is truncated: `... [truncated]`)"
+      ]
+    }
+  ],
   "hallucinated_features": [],
-  "confidence": 0.72,
+  "confidence": 0.7,
   "changed_files": [
     "frontend-file-summaries.txt",
     "frontend/src/components/sections/QuizSection.tsx",

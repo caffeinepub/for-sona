@@ -1,59 +1,53 @@
 {
   "kind": "build_request",
-  "title": "Remove Quiz section photo entirely",
+  "title": "Add uploaded Kawaii sticker asset and fix Quiz sticker image path",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-41",
-      "text": "Remove the Quiz section photo entirely so that no quiz-side image is rendered on any breakpoint (mobile or desktop), and remove any related image-loading fallback UI/text from the Quiz section.",
+      "id": "REQ-46",
+      "text": "Add the user-uploaded sticker image file \"🖤 Kawaii Valentine's Stickers!-1.jpg\" to the frontend static assets under `frontend/public/assets/generated/` using a sanitized filename (lowercase, hyphen-separated, no spaces/special characters), and ensure it is directly loadable at `/assets/generated/<sanitized-filename>.jpg`.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-8"
+          "msg-7"
         ],
         "quotes": [
-          "then just remove the quiz photo entirely."
+          "yes do it",
+          "The user has uploaded 1 image(s): 🖤 Kawaii Valentine's Stickers!-1.jpg."
         ]
       },
       "acceptanceCriteria": [
-        "`frontend/src/components/sections/QuizSection.tsx` no longer renders the `QuizImage` component (or any `<img>` for the quiz photo) in either the mobile or desktop layouts.",
-        "The Quiz section no longer displays the fallback message \"Photo could not be loaded\" (or any other quiz-photo placeholder/fallback UI), because the quiz photo is not rendered at all.",
-        "Any quiz-photo-specific state/imports (e.g., `imageError` state and `Heart` import used only for the quiz photo fallback) are removed if they are no longer needed.",
-        "The Quiz section remains responsive and visually balanced on both mobile and desktop after the image removal, with no layout breakage or excessive empty space."
+        "A new file exists at `frontend/public/assets/generated/kawaii-valentines-stickers-1.jpg` (or an equivalent sanitized filename that is lowercase, hyphen-separated, and contains no spaces/special characters).",
+        "Requesting `/assets/generated/kawaii-valentines-stickers-1.jpg` in the deployed app returns the image (no 404)."
       ]
     },
     {
-      "id": "REQ-42",
-      "text": "Update the Quiz section layout to avoid reserving space for the removed side image (e.g., collapse the two-column grid to a single-column layout on large screens) while keeping the quiz content styling and behavior (questions, scoring, celebration animation, results view) unchanged.",
+      "id": "REQ-47",
+      "text": "Update `frontend/src/components/sections/QuizSection.tsx` so the corner sticker `<img>` `src` matches the actual sanitized asset path under `/assets/generated/` and the sticker reliably renders in both the quiz question card and the quiz results card.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-8"
+          "msg-4",
+          "msg-7"
         ],
         "quotes": [
-          "then just remove the quiz photo entirely."
+          "i cant seem to see the image.",
+          "yes do it"
         ]
       },
       "acceptanceCriteria": [
-        "On large screens, the Quiz section no longer uses a layout that reserves a dedicated right-side column for a photo (no empty sticky column remains).",
-        "Quiz flow still functions end-to-end: selecting answers progresses through all 3 questions, celebration animation triggers on correct answers, and results render after question 3 with the existing result messages and \"Try Again\" reset behavior.",
-        "No backend changes are required for this update."
+        "In `frontend/src/components/sections/QuizSection.tsx`, both sticker `<img>` elements currently using `src=\"/assets/generated/kawaii-valentines-stickers.jpg\"` are updated to the sanitized, real path (e.g. `/assets/generated/kawaii-valentines-stickers-1.jpg`).",
+        "On the Quiz section, the sticker is visible on the question card view and remains visible on the results card view.",
+        "No new user-facing fallback text is introduced for the sticker; if the image loads successfully, there is no broken-image icon shown."
       ]
     }
   ],
-  "constraints": [
-    "Do not edit files in `frontend/src/components/ui` (read-only Shadcn components); compose them instead.",
-    "Do not modify any frontend immutable paths listed in SYSTEM_CONTEXT.",
-    "Do not route images through the backend; static assets remain under `frontend/public/assets/generated` (even though the quiz photo will no longer be rendered).",
-    "Backend remains a single Motoko actor; no backend work is needed for this change."
-  ],
-  "nonGoals": [
-    "Do not change the quiz questions, correct answers, scoring logic, celebration animation behavior, or results messages.",
-    "Do not change the Hero section image behavior.",
-    "Do not attempt to fix the underlying asset-loading/configuration issue as part of this change; this request is specifically to remove the quiz photo."
-  ],
+  "constraints": [],
+  "nonGoals": [],
   "imageRequirements": {
-    "required": [],
+    "required": [
+      "Kawaii bear holding bouquet sticker (kawaii-valentines-stickers-1.dim_220x220.jpg)"
+    ],
     "edits": []
   },
   "userProfileUpdate": {

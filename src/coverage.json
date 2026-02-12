@@ -1,7 +1,7 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-11T03:12:22.682Z",
+  "generatedAt": "2026-02-12T03:26:01.844Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
@@ -11,19 +11,20 @@
     "implemented": 2,
     "items": [
       {
-        "id": "REQ-41",
-        "summary": "Remove the Quiz section photo entirely so that no quiz-side image is rendered on any breakpoint (mobile or desktop), and remove any related image-loading fallback UI/text from the Quiz section.",
+        "id": "REQ-46",
+        "summary": "Add the user-uploaded sticker image file \"🖤 Kawaii Valentine's Stickers!-1.jpg\" to the frontend static assets under `frontend/public/assets/generated/` using a sanitized filename (lowercase, hyphen-separated, no spaces/special characters), and ensure it is directly loadable at `/assets/generated/<sanitized-filename>.jpg`.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/sections/QuizSection.tsx"
+          "frontend/public/assets/generated/kawaii-valentines-stickers-1.jpg",
+          "frontend/public/assets/generated/kawaii-valentines-stickers-1.dim_220x220.jpg"
         ],
         "matchedFiles": [
-          "frontend/src/components/sections/QuizSection.tsx"
+          "frontend/public/assets/generated/kawaii-valentines-stickers-1.dim_220x220.jpg"
         ]
       },
       {
-        "id": "REQ-42",
-        "summary": "Update the Quiz section layout to avoid reserving space for the removed side image (e.g., collapse the two-column grid to a single-column layout on large screens) while keeping the quiz content styling and behavior (questions, scoring, celebration animation, results view) unchanged.",
+        "id": "REQ-47",
+        "summary": "Update `frontend/src/components/sections/QuizSection.tsx` so the corner sticker `<img>` `src` matches the actual sanitized asset path under `/assets/generated/` and the sticker reliably renders in both the quiz question card and the quiz results card.",
         "status": "implemented",
         "plannedFiles": [
           "frontend/src/components/sections/QuizSection.tsx"
@@ -39,6 +40,7 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
+    "frontend/public/assets/generated/kawaii-valentines-stickers-1.dim_220x220.jpg",
     "frontend/src/components/sections/QuizSection.tsx",
     "project_state.json",
     "scratch/component-selection.json",

@@ -75,7 +75,15 @@ export function QuizSection() {
                 Quiz Results
               </h2>
               
-              <div className="bg-card rounded-3xl p-12 shadow-lg border border-border">
+              <div className="relative bg-card rounded-3xl p-12 shadow-lg border border-border overflow-hidden">
+                {/* Kawaii bear sticker - corner decoration */}
+                <img
+                  src="/assets/generated/kawaii-valentines-stickers-1.jpg"
+                  alt=""
+                  className="absolute -top-4 -right-4 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 object-contain pointer-events-none select-none opacity-90 rotate-12"
+                  aria-hidden="true"
+                />
+                
                 <div className="space-y-6">
                   <div className="text-6xl font-bold text-primary">
                     {score} / {questions.length}
@@ -116,7 +124,15 @@ export function QuizSection() {
             </p>
           </div>
 
-          <div className="bg-card rounded-3xl p-8 sm:p-12 shadow-lg border border-border">
+          <div className="relative bg-card rounded-3xl p-8 sm:p-12 shadow-lg border border-border overflow-hidden">
+            {/* Kawaii bear sticker - corner decoration */}
+            <img
+              src="/assets/generated/kawaii-valentines-stickers-1.jpg"
+              alt=""
+              className="absolute -top-4 -right-4 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 object-contain pointer-events-none select-none opacity-90 rotate-12"
+              aria-hidden="true"
+            />
+            
             <h3 className="text-2xl sm:text-3xl font-serif text-foreground mb-8 text-center">
               {currentQuestion.question}
             </h3>

@@ -10,6 +10,6 @@
   "frontend/src/index.css": "Global styles with warm cream/rose/terracotta OKLCH color palette for light and dark modes, smooth scrolling, and typography baseline.",
   "frontend/tailwind.config.js": "Tailwind configuration extended with Playfair Display serif font, warm color tokens, custom shadows, consistent border radius values, and new keyframe animations for confetti, celebration burst, and sparkle effects used in the quiz.",
   "frontend/index.html": "HTML entry point with updated title, meta description, and Google Fonts preload for Inter and Playfair Display typefaces.",
-  "frontend/src/components/sections/QuizSection.tsx": "Interactive quiz section with 3 multiple-choice questions about Sona, tracks score, triggers celebration animations on correct answers, displays personalized results, and uses a centered single-column layout without any photo display.",
+  "frontend/src/components/sections/QuizSection.tsx": "Interactive quiz section with 3 multiple-choice questions about Sona, tracks score, triggers celebration animations on correct answers, displays personalized results, and features a kawaii bear sticker positioned as a small corner decoration on both the question and results cards using the correct asset path `/assets/generated/kawaii-valentines-stickers-1.jpg`.",
   "frontend/src/components/quiz/CelebrationAnimation.tsx": "Reusable celebration animation component with confetti particles, center burst emoji effect, and sparkles that displays as a full-screen overlay when triggered by correct quiz answers or results display."
 }

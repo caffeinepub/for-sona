@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 31,
-  "summary": "Build a personal dedication website for Sona with a large hero image and an interactive “How well do you know Sona” quiz; the quiz-side photo should be removed entirely (no image displayed) since it is failing to load and the user no longer wants it.",
+  "projectStateVersion": 35,
+  "summary": "Build a personal dedication website for Sona with a large hero image and an interactive “How well do you know Sona” quiz; add a small sticker image on page two (the quiz page) off to the side as a corner sticker on the quiz box.",
   "architectural_notes": [
     "Quiz should track score across 3 questions and render a final results state after the last question.",
     "Celebration animation should be reusable for correct-answer feedback and final-results display.",
@@ -9,15 +9,18 @@
     "Hero image should use a cute built-in/static asset (not user-uploaded photos) and must reliably load from `frontend/public/assets/generated/` without fallback.",
     "If switching to a user-provided hero image, add it as a static asset under `frontend/public/assets/generated/` with a sanitized filename and update HeroSection to reference the exact `/assets/generated/...` path.",
     "Quiz section: placement/layout is approved; only swap the referenced static asset to the newly provided image (sanitized filename under `frontend/public/assets/generated/`) and ensure the `<img src>` matches the exact built path.",
-    "Quiz section: remove the quiz-side photo entirely (no desktop sticky image and no mobile inline image) and ensure the layout remains responsive without an image or image-fallback UI."
+    "Quiz section: remove the quiz-side photo entirely (no desktop sticky image and no mobile inline image) and ensure the layout remains responsive without an image or image-fallback UI.",
+    "Quiz page: add the user-provided image as a small corner “sticker” overlay on the quiz box (not a full side photo), and ensure it remains responsive on mobile/desktop."
   ],
   "known_issues": [
     "Build/publish attempt failed with an internal configuration error; user requested retry.",
     "Quiz page image is not visible for the user (image not loading/displaying).",
     "Quiz image placement is correct, but the Quiz section is currently showing the wrong image; needs to be swapped to the newly provided correct image asset.",
-    "User reports the UI shows the fallback message “photo could not be loaded”, indicating the referenced image asset is still failing to load in production."
+    "User reports the UI shows the fallback message “photo could not be loaded”, indicating the referenced image asset is still failing to load in production.",
+    "Sticker image on quiz page is not visible; likely missing from `frontend/public/assets/generated/` at the expected path `/assets/generated/kawaii-valentines-stickers.jpg` (asset not present or filename mismatch)."
   ],
   "isFixRequest": true,
+  "imageRequirements": "## Required Images\n- Kawaii bear holding bouquet sticker (kawaii-valentines-stickers-1.dim_220x220.jpg)",
   "existing_features": [
     {
       "id": "feature-create-a-single-page-personal-dedication-website-that-clearly-communicates-that-it-is-for-someone-very-special-with-english-user-facing-text-throughout",
@@ -314,6 +317,38 @@
         "REQ-42"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-in-frontend-src-components-sections-quizsection-tsx-render-the-uploaded-sticker-image-as-a-small-corner-sticker-attached-to-the-quiz-card-on-the-quiz-section-page-two-positioned-off-to-the-side-option-1-the-sticker-must-not-block-the-question-text-or-answer-buttons-must-remain-visually-attached-to-the-quiz-card-and-must-be-responsive-scale-position-appropriately-on-mobile",
+      "title": "In `frontend/src/components/sections/QuizSection.tsx`, render the uploaded sticker image as a small \"corner sticker\" attached to the quiz card on the Quiz section (page two), positioned off to the side (option 1). The sticker must not block the question text or answer buttons, must remain visually attached to the quiz card, and must be responsive (scale/position appropriately on mobile).",
+      "reqIds": [
+        "REQ-44"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-same-corner-sticker-presentation-is-also-shown-on-the-quiz-section-results-card-the-quiz-results-view-keeping-the-existing-quiz-behavior-scoring-transitions-celebration-animation-and-reset-button-unchanged",
+      "title": "Ensure the same corner sticker presentation is also shown on the Quiz section results card (the \"Quiz Results\" view), keeping the existing quiz behavior (scoring, transitions, celebration animation, and reset button) unchanged.",
+      "reqIds": [
+        "REQ-45"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-the-user-uploaded-sticker-image-file-kawaii-valentine-s-stickers-1-jpg-to-the-frontend-static-assets-under-frontend-public-assets-generated-using-a-sanitized-filename-lowercase-hyphen-separated-no-spaces-special-characters-and-ensure-it-is-directly-loadable-at-assets-generated-sanitized-filename-jpg",
+      "title": "Add the user-uploaded sticker image file \"🖤 Kawaii Valentine's Stickers!-1.jpg\" to the frontend static assets under `frontend/public/assets/generated/` using a sanitized filename (lowercase, hyphen-separated, no spaces/special characters), and ensure it is directly loadable at `/assets/generated/<sanitized-filename>.jpg`.",
+      "reqIds": [
+        "REQ-46"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-frontend-src-components-sections-quizsection-tsx-so-the-corner-sticker-img-src-matches-the-actual-sanitized-asset-path-under-assets-generated-and-the-sticker-reliably-renders-in-both-the-quiz-question-card-and-the-quiz-results-card",
+      "title": "Update `frontend/src/components/sections/QuizSection.tsx` so the corner sticker `<img>` `src` matches the actual sanitized asset path under `/assets/generated/` and the sticker reliably renders in both the quiz question card and the quiz results card.",
+      "reqIds": [
+        "REQ-47"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -423,6 +458,20 @@
       "id": "AR-22",
       "summary": "Remove the Quiz section photo entirely (do not render the quiz-side image on any breakpoint) and keep the Quiz layout responsive without it.",
       "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-23",
+      "summary": "Add the user-provided picture as a small sticker in the corner of the quiz box on page two (Quiz page), positioned off to the side (option 1).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-24",
+      "summary": "Add the user-uploaded image file \"🖤 Kawaii Valentine's Stickers!.jpg\" to the frontend static assets under `frontend/public/assets/generated/` using a sanitized filename (lowercase, hyphen-separated, no spaces/special characters), and ensure it can be loaded directly from `/assets/generated/<sanitized-filename>.jpg`.",
+      "reqIds": [
+        "REQ-43"
+      ],
       "status": "pending"
     }
   ],
