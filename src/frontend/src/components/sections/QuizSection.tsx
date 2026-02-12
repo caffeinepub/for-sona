@@ -76,9 +76,9 @@ export function QuizSection() {
               </h2>
               
               <div className="relative bg-card rounded-3xl p-12 shadow-lg border border-border overflow-hidden">
-                {/* Kawaii bear sticker - corner decoration */}
+                {/* Teddy bear sticker - corner decoration */}
                 <img
-                  src="/assets/generated/kawaii-valentines-stickers-1.jpg"
+                  src="/assets/generated/teddy-bear-sticker.dim_220x220.png"
                   alt=""
                   className="absolute -top-4 -right-4 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 object-contain pointer-events-none select-none opacity-90 rotate-12"
                   aria-hidden="true"
@@ -125,9 +125,9 @@ export function QuizSection() {
           </div>
 
           <div className="relative bg-card rounded-3xl p-8 sm:p-12 shadow-lg border border-border overflow-hidden">
-            {/* Kawaii bear sticker - corner decoration */}
+            {/* Teddy bear sticker - corner decoration */}
             <img
-              src="/assets/generated/kawaii-valentines-stickers-1.jpg"
+              src="/assets/generated/teddy-bear-sticker.dim_220x220.png"
               alt=""
               className="absolute -top-4 -right-4 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 object-contain pointer-events-none select-none opacity-90 rotate-12"
               aria-hidden="true"

@@ -2,8 +2,8 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-add-the-user-uploaded-sticker-image-file-kawaii-valentine-s-stickers-1-jpg-to-the-frontend-static-assets-under-frontend-public-assets-generated-using-a-sanitized-filename-lowercase-hyphen-separated-no-spaces-special-characters-and-ensure-it-is-directly-loadable-at-assets-generated-sanitized-filename-jpg",
-      "featureTitle": "Add the user-uploaded sticker image file \"🖤 Kawaii Valentine's Stickers!-1.jpg\" to the frontend static assets under `frontend/public/assets/generated/` using a sanitized filename (lowercase, hyphen-separated, no spaces/special characters), and ensure it is directly loadable at `/assets/generated/<sanitized-filename>.jpg`.",
+      "featureId": "feature-add-a-new-teddy-bear-style-cartoony-sticker-image-as-a-static-asset-under-frontend-public-assets-generated-using-a-sanitized-filename-lowercase-hyphen-separated-no-spaces-special-characters-and-ensure-it-is-directly-loadable-via-assets-generated-filename",
+      "featureTitle": "Add a new teddy-bear-style cartoony sticker image as a static asset under `frontend/public/assets/generated/` using a sanitized filename (lowercase, hyphen-separated, no spaces/special characters), and ensure it is directly loadable via `/assets/generated/<filename>`.",
       "files": [],
       "components": [
         "core-infrastructure@1.0.2",
@@ -13,13 +13,13 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-46"
+        "REQ-50"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-update-frontend-src-components-sections-quizsection-tsx-so-the-corner-sticker-img-src-matches-the-actual-sanitized-asset-path-under-assets-generated-and-the-sticker-reliably-renders-in-both-the-quiz-question-card-and-the-quiz-results-card",
-      "featureTitle": "Update `frontend/src/components/sections/QuizSection.tsx` so the corner sticker `<img>` `src` matches the actual sanitized asset path under `/assets/generated/` and the sticker reliably renders in both the quiz question card and the quiz results card.",
+      "featureId": "feature-update-frontend-src-components-sections-quizsection-tsx-to-replace-the-current-corner-sticker-img-src-assets-generated-kawaii-valentines-stickers-dim-220x220-png-with-the-new-teddy-bear-sticker-asset-path-in-both-the-quiz-question-card-view-and-the-quiz-results-card-view-keeping-the-existing-placement-responsive-sizing-rotation-and-ensuring-it-does-not-block-text-or-buttons",
+      "featureTitle": "Update `frontend/src/components/sections/QuizSection.tsx` to replace the current corner-sticker `<img>` `src` (`/assets/generated/kawaii-valentines-stickers.dim_220x220.png`) with the new teddy-bear sticker asset path, in BOTH the quiz question card view and the quiz results card view, keeping the existing placement/responsive sizing/rotation and ensuring it does not block text or buttons.",
       "files": [
         "frontend/src/components/sections/QuizSection.tsx"
       ],
@@ -31,7 +31,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-47"
+        "REQ-51"
       ],
       "confidence": "high"
     }

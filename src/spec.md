@@ -1,10 +1,10 @@
 # Specification
 
 ## Summary
-**Goal:** Add the uploaded Kawaii sticker asset to the app and fix the Quiz section sticker image path so the sticker displays reliably.
+**Goal:** Replace the quiz page corner sticker with a cute teddy-bear-style cartoon sticker.
 
 **Planned changes:**
-- Add the uploaded image `🖤 Kawaii Valentine's Stickers!-1.jpg` to `frontend/public/assets/generated/` with a sanitized filename (lowercase, hyphen-separated) so it is directly accessible via `/assets/generated/<sanitized-filename>.jpg`.
-- Update `frontend/src/components/sections/QuizSection.tsx` so both corner sticker `<img>` elements use the sanitized, correct `/assets/generated/...` path and render on both the quiz question card and results card.
+- Add a new teddy-bear cartoon sticker image asset under `frontend/public/assets/generated/` with a sanitized filename and ensure it is loadable via `/assets/generated/<filename>`.
+- Update `frontend/src/components/sections/QuizSection.tsx` to swap the existing corner sticker image source to the new teddy-bear sticker path in both the quiz question card and quiz results card, keeping the current placement/sizing/rotation and avoiding overlap with text/buttons.
 
-**User-visible outcome:** The Kawaii sticker appears correctly in the Quiz section (both during questions and on results) without broken images.
+**User-visible outcome:** The quiz question and results cards show a teddy bear corner sticker instead of the current kawaii Valentine sticker, with the quiz behavior otherwise unchanged.

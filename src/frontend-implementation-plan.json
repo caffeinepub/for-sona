@@ -1,41 +1,36 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Add Kawaii sticker asset and fix Quiz sticker image path",
+  "title": "Swap quiz corner sticker to teddy bear sticker",
   "requirements": [
     {
-      "id": "REQ-46",
-      "summary": "Add the uploaded Kawaii sticker image to public generated assets using a sanitized filename and ensure it is directly loadable.",
+      "id": "REQ-50",
+      "summary": "Add a new teddy-bear cartoon sticker image as a static asset under frontend/public/assets/generated/ with a sanitized filename and ensure it is loadable as a public static asset.",
       "acceptanceCriteria": [
-        "A new file exists at `frontend/public/assets/generated/kawaii-valentines-stickers-1.jpg` (or an equivalent sanitized filename that is lowercase, hyphen-separated, and contains no spaces/special characters).",
-        "Requesting `/assets/generated/kawaii-valentines-stickers-1.jpg` in the deployed app returns the image (no 404)."
+        "A new teddy bear cartoon sticker image file exists under `frontend/public/assets/generated/` with a sanitized filename.",
+        "Requesting `GET /assets/generated/<sanitized-filename>` in the browser loads the image (no 404)."
       ],
       "file_operations": [
         {
-          "path": "frontend/public/assets/generated/kawaii-valentines-stickers-1.jpg",
+          "path": "frontend/public/assets/generated/teddy-bear-sticker.dim_220x220.png",
           "operation": "create",
-          "description": "Add the user-uploaded image asset (sanitized filename) so it is served as a static file at `/assets/generated/kawaii-valentines-stickers-1.jpg`."
-        },
-        {
-          "path": "frontend/public/assets/generated/kawaii-valentines-stickers-1.dim_220x220.jpg",
-          "operation": "create",
-          "description": "Add the required generated image asset variant referenced by image requirements: `frontend/public/assets/generated/kawaii-valentines-stickers-1.dim_220x220.jpg`."
+          "description": "Add the generated static teddy bear sticker image asset (transparent background) at this exact path so it is publicly served by the frontend static file server."
         }
       ]
     },
     {
-      "id": "REQ-47",
-      "summary": "Fix QuizSection corner sticker <img> src to reference the real sanitized generated asset so it renders in both question and results cards.",
+      "id": "REQ-51",
+      "summary": "Replace the existing quiz corner sticker image source with the new teddy bear sticker in both the question and results card views while preserving layout and preventing overlay from blocking content.",
       "acceptanceCriteria": [
-        "In `frontend/src/components/sections/QuizSection.tsx`, both sticker `<img>` elements currently using `src=\"/assets/generated/kawaii-valentines-stickers.jpg\"` are updated to the sanitized, real path (e.g. `/assets/generated/kawaii-valentines-stickers-1.jpg`).",
-        "On the Quiz section, the sticker is visible on the question card view and remains visible on the results card view.",
-        "No new user-facing fallback text is introduced for the sticker; if the image loads successfully, there is no broken-image icon shown."
+        "In `QuizSection.tsx`, both sticker `<img>` instances (question card and results card) use the exact same new teddy-bear sticker `/assets/generated/...` path.",
+        "The sticker renders visibly on the quiz question card and on the quiz results card.",
+        "The sticker overlay does not cover the question text or answer buttons at common breakpoints (mobile and desktop)."
       ],
       "file_operations": [
         {
           "path": "frontend/src/components/sections/QuizSection.tsx",
           "operation": "modify",
-          "description": "Update both corner sticker `<img>` `src` values to `/assets/generated/kawaii-valentines-stickers-1.jpg` (or the finalized sanitized filename) so the sticker renders in both question and results cards."
+          "description": "Update both corner-sticker <img> src values (question and results card) from `/assets/generated/kawaii-valentines-stickers.dim_220x220.png` to `/assets/generated/teddy-bear-sticker.dim_220x220.png`, keeping existing positioning/sizing/rotation classes and ensuring the sticker remains pointer-events-none so it cannot block text or buttons."
         }
       ]
     }

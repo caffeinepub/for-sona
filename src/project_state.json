@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 35,
-  "summary": "Build a personal dedication website for Sona with a large hero image and an interactive “How well do you know Sona” quiz; add a small sticker image on page two (the quiz page) off to the side as a corner sticker on the quiz box.",
+  "projectStateVersion": 39,
+  "summary": "Build a personal dedication website for Sona with a large hero image and an interactive “How well do you know Sona” quiz; add a small teddy-bear-style cartoony sticker image on page two (the quiz page) as a corner sticker on the quiz box.",
   "architectural_notes": [
     "Quiz should track score across 3 questions and render a final results state after the last question.",
     "Celebration animation should be reusable for correct-answer feedback and final-results display.",
@@ -10,17 +10,21 @@
     "If switching to a user-provided hero image, add it as a static asset under `frontend/public/assets/generated/` with a sanitized filename and update HeroSection to reference the exact `/assets/generated/...` path.",
     "Quiz section: placement/layout is approved; only swap the referenced static asset to the newly provided image (sanitized filename under `frontend/public/assets/generated/`) and ensure the `<img src>` matches the exact built path.",
     "Quiz section: remove the quiz-side photo entirely (no desktop sticky image and no mobile inline image) and ensure the layout remains responsive without an image or image-fallback UI.",
-    "Quiz page: add the user-provided image as a small corner “sticker” overlay on the quiz box (not a full side photo), and ensure it remains responsive on mobile/desktop."
+    "Quiz page: add the user-provided image as a small corner “sticker” overlay on the quiz box (not a full side photo), and ensure it remains responsive on mobile/desktop.",
+    "If the sticker still fails to load, swap to the newly provided sticker image by adding it to `frontend/public/assets/generated/` with a sanitized filename and updating the Quiz sticker `<img src>` to the exact `/assets/generated/...` path.",
+    "Quiz page: use a teddy bear cartoony sticker as the corner “sticker” overlay on the quiz box (and results card), added as a sanitized static asset under `frontend/public/assets/generated/` and referenced via the exact `/assets/generated/...` path."
   ],
   "known_issues": [
     "Build/publish attempt failed with an internal configuration error; user requested retry.",
     "Quiz page image is not visible for the user (image not loading/displaying).",
     "Quiz image placement is correct, but the Quiz section is currently showing the wrong image; needs to be swapped to the newly provided correct image asset.",
     "User reports the UI shows the fallback message “photo could not be loaded”, indicating the referenced image asset is still failing to load in production.",
-    "Sticker image on quiz page is not visible; likely missing from `frontend/public/assets/generated/` at the expected path `/assets/generated/kawaii-valentines-stickers.jpg` (asset not present or filename mismatch)."
+    "Sticker image on quiz page is not visible; likely missing from `frontend/public/assets/generated/` at the expected path `/assets/generated/kawaii-valentines-stickers.jpg` (asset not present or filename mismatch).",
+    "Latest deployed draft still did not fix the issue; user reports the sticker/image still does not work and requests trying a different image instead.",
+    "User does not want to use the uploaded sticker image; requests replacing it with a teddy bear cartoony sticker instead."
   ],
   "isFixRequest": true,
-  "imageRequirements": "## Required Images\n- Kawaii bear holding bouquet sticker (kawaii-valentines-stickers-1.dim_220x220.jpg)",
+  "imageRequirements": "## Required Images\n- Cartoon teddy bear sticker illustration, cute style, transparent background (teddy-bear-sticker.dim_220x220.png)",
   "existing_features": [
     {
       "id": "feature-create-a-single-page-personal-dedication-website-that-clearly-communicates-that-it-is-for-someone-very-special-with-english-user-facing-text-throughout",
@@ -349,6 +353,38 @@
         "REQ-47"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-add-the-newly-uploaded-sticker-image-file-kawaii-valentine-s-stickers-png-to-the-frontend-static-assets-under-frontend-public-assets-generated-using-a-sanitized-filename-lowercase-hyphen-separated-no-spaces-special-characters-and-ensure-it-is-directly-loadable-at-assets-generated-sanitized-filename-png",
+      "title": "Add the newly uploaded sticker image file \"🖤 Kawaii Valentine's Stickers!.png\" to the frontend static assets under `frontend/public/assets/generated/` using a sanitized filename (lowercase, hyphen-separated, no spaces/special characters), and ensure it is directly loadable at `/assets/generated/<sanitized-filename>.png`.",
+      "reqIds": [
+        "REQ-48"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-frontend-src-components-sections-quizsection-tsx-so-the-corner-sticker-img-uses-the-exact-sanitized-png-asset-path-from-req-48-replacing-the-current-src-assets-generated-kawaii-valentines-stickers-1-jpg-and-ensure-the-sticker-renders-in-both-the-quiz-question-card-and-the-quiz-results-card",
+      "title": "Update `frontend/src/components/sections/QuizSection.tsx` so the corner-sticker `<img>` uses the exact sanitized PNG asset path from REQ-48 (replacing the current `src=\"/assets/generated/kawaii-valentines-stickers-1.jpg\"`), and ensure the sticker renders in both the quiz question card and the quiz results card.",
+      "reqIds": [
+        "REQ-49"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-new-teddy-bear-style-cartoony-sticker-image-as-a-static-asset-under-frontend-public-assets-generated-using-a-sanitized-filename-lowercase-hyphen-separated-no-spaces-special-characters-and-ensure-it-is-directly-loadable-via-assets-generated-filename",
+      "title": "Add a new teddy-bear-style cartoony sticker image as a static asset under `frontend/public/assets/generated/` using a sanitized filename (lowercase, hyphen-separated, no spaces/special characters), and ensure it is directly loadable via `/assets/generated/<filename>`.",
+      "reqIds": [
+        "REQ-50"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-frontend-src-components-sections-quizsection-tsx-to-replace-the-current-corner-sticker-img-src-assets-generated-kawaii-valentines-stickers-dim-220x220-png-with-the-new-teddy-bear-sticker-asset-path-in-both-the-quiz-question-card-view-and-the-quiz-results-card-view-keeping-the-existing-placement-responsive-sizing-rotation-and-ensuring-it-does-not-block-text-or-buttons",
+      "title": "Update `frontend/src/components/sections/QuizSection.tsx` to replace the current corner-sticker `<img>` `src` (`/assets/generated/kawaii-valentines-stickers.dim_220x220.png`) with the new teddy-bear sticker asset path, in BOTH the quiz question card view and the quiz results card view, keeping the existing placement/responsive sizing/rotation and ensuring it does not block text or buttons.",
+      "reqIds": [
+        "REQ-51"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -472,6 +508,18 @@
       "reqIds": [
         "REQ-43"
       ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-25",
+      "summary": "Replace the currently used sticker image on the Quiz page with the newly provided image (add as sanitized static asset under `frontend/public/assets/generated/` and update the sticker `<img src>` to match the exact built path) so it reliably renders.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-26",
+      "summary": "Replace the quiz-page corner sticker with a teddy bear cartoony sticker (static asset under `frontend/public/assets/generated/` with sanitized filename) and wire it so it reliably renders on the quiz card and results card.",
+      "reqIds": [],
       "status": "pending"
     }
   ],

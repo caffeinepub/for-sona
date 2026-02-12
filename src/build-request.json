@@ -1,63 +1,58 @@
 {
   "kind": "build_request",
-  "title": "Add uploaded Kawaii sticker asset and fix Quiz sticker image path",
+  "title": "Replace quiz-page corner sticker with a teddy bear cartoon sticker",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-46",
-      "text": "Add the user-uploaded sticker image file \"🖤 Kawaii Valentine's Stickers!-1.jpg\" to the frontend static assets under `frontend/public/assets/generated/` using a sanitized filename (lowercase, hyphen-separated, no spaces/special characters), and ensure it is directly loadable at `/assets/generated/<sanitized-filename>.jpg`.",
+      "id": "REQ-50",
+      "text": "Add a new teddy-bear-style cartoony sticker image as a static asset under `frontend/public/assets/generated/` using a sanitized filename (lowercase, hyphen-separated, no spaces/special characters), and ensure it is directly loadable via `/assets/generated/<filename>`.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-7"
+          "msg-1"
         ],
         "quotes": [
-          "yes do it",
-          "The user has uploaded 1 image(s): 🖤 Kawaii Valentine's Stickers!-1.jpg."
+          "can you add a teddy bear carttony sticker instead of the one i send"
         ]
       },
       "acceptanceCriteria": [
-        "A new file exists at `frontend/public/assets/generated/kawaii-valentines-stickers-1.jpg` (or an equivalent sanitized filename that is lowercase, hyphen-separated, and contains no spaces/special characters).",
-        "Requesting `/assets/generated/kawaii-valentines-stickers-1.jpg` in the deployed app returns the image (no 404)."
+        "A new teddy bear cartoon sticker image file exists under `frontend/public/assets/generated/` with a sanitized filename.",
+        "Requesting `GET /assets/generated/<sanitized-filename>` in the browser loads the image (no 404)."
       ]
     },
     {
-      "id": "REQ-47",
-      "text": "Update `frontend/src/components/sections/QuizSection.tsx` so the corner sticker `<img>` `src` matches the actual sanitized asset path under `/assets/generated/` and the sticker reliably renders in both the quiz question card and the quiz results card.",
+      "id": "REQ-51",
+      "text": "Update `frontend/src/components/sections/QuizSection.tsx` to replace the current corner-sticker `<img>` `src` (`/assets/generated/kawaii-valentines-stickers.dim_220x220.png`) with the new teddy-bear sticker asset path, in BOTH the quiz question card view and the quiz results card view, keeping the existing placement/responsive sizing/rotation and ensuring it does not block text or buttons.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4",
-          "msg-7"
+          "msg-1"
         ],
         "quotes": [
-          "i cant seem to see the image.",
-          "yes do it"
+          "can you add a teddy bear carttony sticker instead of the one i send"
         ]
       },
       "acceptanceCriteria": [
-        "In `frontend/src/components/sections/QuizSection.tsx`, both sticker `<img>` elements currently using `src=\"/assets/generated/kawaii-valentines-stickers.jpg\"` are updated to the sanitized, real path (e.g. `/assets/generated/kawaii-valentines-stickers-1.jpg`).",
-        "On the Quiz section, the sticker is visible on the question card view and remains visible on the results card view.",
-        "No new user-facing fallback text is introduced for the sticker; if the image loads successfully, there is no broken-image icon shown."
+        "In `QuizSection.tsx`, both sticker `<img>` instances (question card and results card) use the exact same new teddy-bear sticker `/assets/generated/...` path.",
+        "The sticker renders visibly on the quiz question card and on the quiz results card.",
+        "The sticker overlay does not cover the question text or answer buttons at common breakpoints (mobile and desktop)."
       ]
     }
   ],
-  "constraints": [],
-  "nonGoals": [],
+  "constraints": [
+    "Do not edit any files under the immutable paths listed in SYSTEM_CONTEXT.",
+    "Serve images only as static assets from `frontend/public/assets/generated/` (do not serve images via the backend).",
+    "Keep existing quiz behavior (questions, scoring, celebration animation, transitions, reset) unchanged aside from swapping the sticker image source."
+  ],
+  "nonGoals": [
+    "Do not add back the removed quiz side-photo layout or any additional quiz images beyond the corner sticker.",
+    "Do not change quiz copy, questions, answers, or result messages.",
+    "Do not implement any backend changes."
+  ],
   "imageRequirements": {
     "required": [
-      "Kawaii bear holding bouquet sticker (kawaii-valentines-stickers-1.dim_220x220.jpg)"
+      "Cartoon teddy bear sticker illustration, cute style, transparent background (teddy-bear-sticker.dim_220x220.png)"
     ],
     "edits": []
-  },
-  "userProfileUpdate": {
-    "goalsToAdd": [],
-    "goalsToRemove": [],
-    "preferencesToAdd": [],
-    "preferencesToRemove": [],
-    "miscToAdd": [],
-    "miscToRemove": [],
-    "fieldsToSet": {},
-    "fieldsToDelete": []
   }
 }
