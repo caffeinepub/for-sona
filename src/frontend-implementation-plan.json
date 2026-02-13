@@ -1,36 +1,59 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Swap quiz corner sticker to teddy bear sticker",
+  "title": "Public latest-message submission section (anonymous, newest-only)",
   "requirements": [
     {
-      "id": "REQ-50",
-      "summary": "Add a new teddy-bear cartoon sticker image as a static asset under frontend/public/assets/generated/ with a sanitized filename and ensure it is loadable as a public static asset.",
+      "id": "REQ-2",
+      "summary": "Add an anonymous public-message section below the existing Closing/“Message” section that shows the latest stored message and allows submitting a new one (newest only).",
       "acceptanceCriteria": [
-        "A new teddy bear cartoon sticker image file exists under `frontend/public/assets/generated/` with a sanitized filename.",
-        "Requesting `GET /assets/generated/<sanitized-filename>` in the browser loads the image (no 404)."
+        "A new section appears after the existing Closing/\"Message\" section in the main layout.",
+        "The section shows the latest message fetched from the backend on load.",
+        "Submitting a message triggers a backend call and then updates the display to the newly submitted message (no history list is shown).",
+        "The UI works for anonymous visitors (no login prompts required to view or submit).",
+        "On page refresh, the same latest message is still shown (fetched from backend).",
+        "User-facing text in this section is in English."
       ],
       "file_operations": [
         {
-          "path": "frontend/public/assets/generated/teddy-bear-sticker.dim_220x220.png",
+          "path": "frontend/src/components/sections/PublicLatestMessageSection.tsx",
           "operation": "create",
-          "description": "Add the generated static teddy bear sticker image asset (transparent background) at this exact path so it is publicly served by the frontend static file server."
+          "description": "Create a new section component (placed below the existing Closing/\"Message\" section) that: renders the current latest message, provides an English-labeled text input + submit control, performs basic input validation (e.g., trim/empty guard), calls the backend to submit, and refreshes the displayed message afterward. Use the existing core-infrastructure actor access via the app’s hooks; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/usePublicLatestMessage.ts",
+          "operation": "create",
+          "description": "Add a React Query-based hook to (1) fetch the latest message on load and (2) submit a new message then refresh/invalidate the latest-message query. Use the existing actor creation flow from core-infrastructure (via useActor) so anonymous visitors can read/write without login; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire the new PublicLatestMessageSection into the main layout so it renders after the existing ClosingSection (i.e., below the current \"Message\" section). Ensure it is not orphaned and appears in the normal scroll flow."
+        },
+        {
+          "path": "frontend/src/components/TopNav.tsx",
+          "operation": "modify",
+          "description": "Add a navigation button that scrolls to the new public-message section id (English label) to keep navigation consistent with other sections. (Optional UX, but ensures users can easily reach the new section.)"
         }
       ]
     },
     {
-      "id": "REQ-51",
-      "summary": "Replace the existing quiz corner sticker image source with the new teddy bear sticker in both the question and results card views while preserving layout and preventing overlay from blocking content.",
+      "id": "REQ-3",
+      "summary": "Ensure typed frontend bindings and anonymous actor flow support type-safe calls to the new public message methods from React.",
       "acceptanceCriteria": [
-        "In `QuizSection.tsx`, both sticker `<img>` instances (question card and results card) use the exact same new teddy-bear sticker `/assets/generated/...` path.",
-        "The sticker renders visibly on the quiz question card and on the quiz results card.",
-        "The sticker overlay does not cover the question text or answer buttons at common breakpoints (mobile and desktop)."
+        "The frontend builds successfully with type-safe calls to the new backend methods.",
+        "Anonymous usage path (no Internet Identity) can still create an actor and call the new methods successfully."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/sections/QuizSection.tsx",
+          "path": "frontend/src/backend.d.ts",
           "operation": "modify",
-          "description": "Update both corner-sticker <img> src values (question and results card) from `/assets/generated/kawaii-valentines-stickers.dim_220x220.png` to `/assets/generated/teddy-bear-sticker.dim_220x220.png`, keeping existing positioning/sizing/rotation classes and ensuring the sticker remains pointer-events-none so it cannot block text or buttons."
+          "description": "Update/confirm the typed backend interface declarations include the new public message methods (getLatestPublicMessage, submitPublicMessage) with correct TypeScript signatures so the React app can call them type-safely. Ensure no-auth usage is supported at the type level as part of the existing actor typing."
+        },
+        {
+          "path": "frontend/src/hooks/useActor.ts",
+          "operation": "modify",
+          "description": "Verify the existing actor creation flow returns an anonymous actor when no identity is present and that this actor is used by the new latest-message hooks/components. Adjust types/exports/imports if needed so anonymous calls to the new public message methods compile and work without login; verify the component's usage instructions before implementing."
         }
       ]
     }

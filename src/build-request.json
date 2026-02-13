@@ -1,58 +1,83 @@
 {
   "kind": "build_request",
-  "title": "Replace quiz-page corner sticker with a teddy bear cartoon sticker",
+  "title": "Add public no-login latest-message submission section (persist newest message only)",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-50",
-      "text": "Add a new teddy-bear-style cartoony sticker image as a static asset under `frontend/public/assets/generated/` using a sanitized filename (lowercase, hyphen-separated, no spaces/special characters), and ensure it is directly loadable via `/assets/generated/<filename>`.",
-      "target": "frontend",
+      "id": "REQ-1",
+      "text": "Backend: Store a single \"latest public message\" value that persists across canister upgrades and page refreshes, and expose public (no-auth) methods to (1) fetch the latest message and (2) submit a new message that overwrites the previous one.",
+      "target": "backend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-8"
         ],
         "quotes": [
-          "can you add a teddy bear carttony sticker instead of the one i send"
+          "can you make a section where I or anyone else using the page can send a message and it will be displayed. I only need it to display a single message at a time. when a new message comes in , it should only display the newest one.it should require no login or sign in. also the message should be visible even after refreshing the page.",
+          "yes build it. it can be in a new page below the \"message page\""
         ]
       },
       "acceptanceCriteria": [
-        "A new teddy bear cartoon sticker image file exists under `frontend/public/assets/generated/` with a sanitized filename.",
-        "Requesting `GET /assets/generated/<sanitized-filename>` in the browser loads the image (no 404)."
+        "Calling the backend \"get latest message\" method works without requiring Internet Identity authentication.",
+        "Calling the backend \"submit message\" method works without requiring Internet Identity authentication.",
+        "Only one message is stored at any time; submitting a new message replaces the previous stored message.",
+        "After a hard refresh of the page, the latest stored message is still displayed.",
+        "Data is stored in stable state so it survives canister upgrades (add migration only if required by the existing state shape/policy)."
       ]
     },
     {
-      "id": "REQ-51",
-      "text": "Update `frontend/src/components/sections/QuizSection.tsx` to replace the current corner-sticker `<img>` `src` (`/assets/generated/kawaii-valentines-stickers.dim_220x220.png`) with the new teddy-bear sticker asset path, in BOTH the quiz question card view and the quiz results card view, keeping the existing placement/responsive sizing/rotation and ensuring it does not block text or buttons.",
+      "id": "REQ-2",
+      "text": "Frontend: Add a new UI section/page below the existing \"Message\" (closing) section that (a) displays the current latest stored message and (b) provides a text input + submit control for anyone to post a new message without login; after submission, the UI must update to show only the newest message.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-8"
         ],
         "quotes": [
-          "can you add a teddy bear carttony sticker instead of the one i send"
+          "it can be in a new page below the \"message page\"",
+          "it should require no login or sign in",
+          "it should only display the newest one"
         ]
       },
       "acceptanceCriteria": [
-        "In `QuizSection.tsx`, both sticker `<img>` instances (question card and results card) use the exact same new teddy-bear sticker `/assets/generated/...` path.",
-        "The sticker renders visibly on the quiz question card and on the quiz results card.",
-        "The sticker overlay does not cover the question text or answer buttons at common breakpoints (mobile and desktop)."
+        "A new section appears after the existing Closing/\"Message\" section in the main layout.",
+        "The section shows the latest message fetched from the backend on load.",
+        "Submitting a message triggers a backend call and then updates the display to the newly submitted message (no history list is shown).",
+        "The UI works for anonymous visitors (no login prompts required to view or submit).",
+        "On page refresh, the same latest message is still shown (fetched from backend).",
+        "User-facing text in this section is in English."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Frontend/Backend integration: Update the typed frontend backend interface bindings (candid/declarations) so the new public message methods are callable from the React app using the existing actor creation flow (including anonymous actor usage).",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-8"
+        ],
+        "quotes": [
+          "it should require no login or sign in. also the message should be visible even after refreshing the page."
+        ]
+      },
+      "acceptanceCriteria": [
+        "The frontend builds successfully with type-safe calls to the new backend methods.",
+        "Anonymous usage path (no Internet Identity) can still create an actor and call the new methods successfully."
       ]
     }
   ],
   "constraints": [
-    "Do not edit any files under the immutable paths listed in SYSTEM_CONTEXT.",
-    "Serve images only as static assets from `frontend/public/assets/generated/` (do not serve images via the backend).",
-    "Keep existing quiz behavior (questions, scoring, celebration animation, transitions, reset) unchanged aside from swapping the sticker image source."
+    "Backend must remain a single Motoko actor in backend/main.mo (no additional backend services).",
+    "Do not edit any frontend paths listed as immutable in SYSTEM_CONTEXT (compose existing UI components instead).",
+    "Use English for any user-facing text."
   ],
   "nonGoals": [
-    "Do not add back the removed quiz side-photo layout or any additional quiz images beyond the corner sticker.",
-    "Do not change quiz copy, questions, answers, or result messages.",
-    "Do not implement any backend changes."
+    "User accounts, login, or Internet Identity gating for message submission.",
+    "Storing or displaying a history/feed of messages (only the latest message is kept).",
+    "Real-time updates (no websockets/push; updates can be via fetch after submit / on load).",
+    "Admin moderation, profanity filtering, or anti-spam systems beyond basic input validation (if any)."
   ],
   "imageRequirements": {
-    "required": [
-      "Cartoon teddy bear sticker illustration, cute style, transparent background (teddy-bear-sticker.dim_220x220.png)"
-    ],
+    "required": [],
     "edits": []
   }
 }

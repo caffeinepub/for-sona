@@ -1,10 +1,11 @@
 # Specification
 
 ## Summary
-**Goal:** Replace the quiz page corner sticker with a cute teddy-bear-style cartoon sticker.
+**Goal:** Add a public, no-login “latest message” area that lets anyone submit a message and displays only the newest one, persisted across refreshes and canister upgrades.
 
 **Planned changes:**
-- Add a new teddy-bear cartoon sticker image asset under `frontend/public/assets/generated/` with a sanitized filename and ensure it is loadable via `/assets/generated/<filename>`.
-- Update `frontend/src/components/sections/QuizSection.tsx` to swap the existing corner sticker image source to the new teddy-bear sticker path in both the quiz question card and quiz results card, keeping the current placement/sizing/rotation and avoiding overlap with text/buttons.
+- Backend: Add stable storage for a single “latest public message” value and expose two public (no-auth) methods to fetch the latest message and submit/overwrite it.
+- Frontend: Add a new section/page below the existing Closing/“Message” section that fetches and displays the latest message on load, and includes an English text input + submit control for anonymous posting.
+- Integration: Update candid/declarations so the React app can call the new methods via the existing actor creation flow, including anonymous usage.
 
-**User-visible outcome:** The quiz question and results cards show a teddy bear corner sticker instead of the current kawaii Valentine sticker, with the quiz behavior otherwise unchanged.
+**User-visible outcome:** Visitors can view the current latest public message and submit a new one without signing in; after submitting, only the newest message is shown, and it remains visible after a page refresh.

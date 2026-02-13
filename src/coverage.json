@@ -1,46 +1,67 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-12T03:38:50.277Z",
+  "generatedAt": "2026-02-13T14:34:51.057Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 2,
+    "total": 3,
     "implemented": 2,
     "items": [
       {
-        "id": "REQ-50",
-        "summary": "Add a new teddy-bear-style cartoony sticker image as a static asset under `frontend/public/assets/generated/` using a sanitized filename (lowercase, hyphen-separated, no spaces/special characters), and ensure it is directly loadable via `/assets/generated/<filename>`.",
+        "id": "REQ-1",
+        "summary": "Backend: Store a single \"latest public message\" value that persists across canister upgrades and page refreshes, and expose public (no-auth) methods to (1) fetch the latest message and (2) submit a new message that overwrites the previous one.",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-2",
+        "summary": "Frontend: Add a new UI section/page below the existing \"Message\" (closing) section that (a) displays the current latest stored message and (b) provides a text input + submit control for anyone to post a new message without login; after submission, the UI must update to show only the newest message.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/public/assets/generated/teddy-bear-sticker.dim_220x220.png"
+          "frontend/src/components/sections/PublicLatestMessageSection.tsx",
+          "frontend/src/hooks/usePublicLatestMessage.ts",
+          "frontend/src/App.tsx",
+          "frontend/src/components/TopNav.tsx"
         ],
         "matchedFiles": [
-          "frontend/public/assets/generated/teddy-bear-sticker.dim_220x220.png"
+          "frontend/src/components/sections/PublicLatestMessageSection.tsx",
+          "frontend/src/hooks/usePublicLatestMessage.ts",
+          "frontend/src/App.tsx",
+          "frontend/src/components/TopNav.tsx"
         ]
       },
       {
-        "id": "REQ-51",
-        "summary": "Update `frontend/src/components/sections/QuizSection.tsx` to replace the current corner-sticker `<img>` `src` (`/assets/generated/kawaii-valentines-stickers.dim_220x220.png`) with the new teddy-bear sticker asset path, in BOTH the quiz question card view and the quiz results card view, keeping the existing placement/responsive sizing/rotation and ensuring it does not block text or buttons.",
+        "id": "REQ-3",
+        "summary": "Frontend/Backend integration: Update the typed frontend backend interface bindings (candid/declarations) so the new public message methods are callable from the React app using the existing actor creation flow (including anonymous actor usage).",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/sections/QuizSection.tsx"
+          "frontend/src/backend.d.ts",
+          "frontend/src/hooks/useActor.ts"
         ],
         "matchedFiles": [
-          "frontend/src/components/sections/QuizSection.tsx"
+          "frontend/src/backend.d.ts"
         ]
       }
     ]
   },
   "changedFiles": [
+    "backend/main.mo",
     "build-request.json",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/public/assets/generated/teddy-bear-sticker.dim_220x220.png",
-    "frontend/src/components/sections/QuizSection.tsx",
+    "frontend/src/App.tsx",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
+    "frontend/src/components/TopNav.tsx",
+    "frontend/src/components/sections/PublicLatestMessageSection.tsx",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
+    "frontend/src/hooks/usePublicLatestMessage.ts",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

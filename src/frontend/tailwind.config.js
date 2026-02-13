@@ -113,6 +113,16 @@ export default {
                         transform: 'scale(1.5) rotate(180deg)',
                         opacity: '1'
                     }
+                },
+                'heart-fall': {
+                    '0%': {
+                        transform: 'translateY(0) rotate(0deg)',
+                        opacity: '1'
+                    },
+                    '100%': {
+                        transform: 'translateY(calc(100vh + 100px)) rotate(360deg)',
+                        opacity: '0.8'
+                    }
                 }
             },
             animation: {
@@ -120,7 +130,8 @@ export default {
                 'accordion-up': 'accordion-up 0.2s ease-out',
                 'confetti': 'confetti 3s ease-out forwards',
                 'celebration-burst': 'celebration-burst 0.6s ease-out forwards',
-                'sparkle': 'sparkle 1.5s ease-in-out forwards'
+                'sparkle': 'sparkle 1.5s ease-in-out forwards',
+                'heart-fall': 'heart-fall 8s ease-in forwards'
             }
         }
     },

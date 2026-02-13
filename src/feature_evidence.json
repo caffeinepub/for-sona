@@ -2,36 +2,43 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-add-a-new-teddy-bear-style-cartoony-sticker-image-as-a-static-asset-under-frontend-public-assets-generated-using-a-sanitized-filename-lowercase-hyphen-separated-no-spaces-special-characters-and-ensure-it-is-directly-loadable-via-assets-generated-filename",
-      "featureTitle": "Add a new teddy-bear-style cartoony sticker image as a static asset under `frontend/public/assets/generated/` using a sanitized filename (lowercase, hyphen-separated, no spaces/special characters), and ensure it is directly loadable via `/assets/generated/<filename>`.",
+      "featureId": "feature-frontend-add-a-new-ui-section-page-below-the-existing-message-closing-section-that-a-displays-the-current-latest-stored-message-and-b-provides-a-text-input-submit-control-for-anyone-to-post-a-new-message-without-login-after-submission-the-ui-must-update-to-show-only-the-newest-message",
+      "featureTitle": "Frontend: Add a new UI section/page below the existing \"Message\" (closing) section that (a) displays the current latest stored message and (b) provides a text input + submit control for anyone to post a new message without login; after submission, the UI must update to show only the newest message.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/TopNav.tsx",
+        "frontend/src/components/sections/PublicLatestMessageSection.tsx",
+        "frontend/src/hooks/usePublicLatestMessage.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0",
+        "blob-storage@4.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-frontend-backend-integration-update-the-typed-frontend-backend-interface-bindings-candid-declarations-so-the-new-public-message-methods-are-callable-from-the-react-app-using-the-existing-actor-creation-flow-including-anonymous-actor-usage",
+      "featureTitle": "Frontend/Backend integration: Update the typed frontend backend interface bindings (candid/declarations) so the new public message methods are callable from the React app using the existing actor creation flow (including anonymous actor usage).",
       "files": [],
       "components": [
         "core-infrastructure@1.0.2",
         "shadcn-ui@1.0.0",
         "build-template-react@1.0.0",
         "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0",
+        "blob-storage@4.0.0"
       ],
       "testIds": [
-        "REQ-50"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-update-frontend-src-components-sections-quizsection-tsx-to-replace-the-current-corner-sticker-img-src-assets-generated-kawaii-valentines-stickers-dim-220x220-png-with-the-new-teddy-bear-sticker-asset-path-in-both-the-quiz-question-card-view-and-the-quiz-results-card-view-keeping-the-existing-placement-responsive-sizing-rotation-and-ensuring-it-does-not-block-text-or-buttons",
-      "featureTitle": "Update `frontend/src/components/sections/QuizSection.tsx` to replace the current corner-sticker `<img>` `src` (`/assets/generated/kawaii-valentines-stickers.dim_220x220.png`) with the new teddy-bear sticker asset path, in BOTH the quiz question card view and the quiz results card view, keeping the existing placement/responsive sizing/rotation and ensuring it does not block text or buttons.",
-      "files": [
-        "frontend/src/components/sections/QuizSection.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-51"
+        "REQ-3"
       ],
       "confidence": "high"
     }

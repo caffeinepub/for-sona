@@ -72,4 +72,9 @@
         @apply bg-background text-foreground antialiased;
         overflow-x: hidden;
     }
+
+    /* Ensure modal images render crisply */
+    img {
+        image-rendering: -webkit-optimize-contrast;
+    }
 }
